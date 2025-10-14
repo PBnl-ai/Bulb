@@ -120,9 +120,9 @@ export default function RadioController() {
             data-testid="button-toggle-radio"
           >
             {isPlaying ? (
-              <Pause className="w-44 h-44 text-[#444444]" />
+              <Pause className="w-56 h-56 text-[#444444]" />
             ) : (
-              <Play className="w-44 h-44 text-[#444444] ml-3" />
+              <Play className="w-56 h-56 text-[#444444] ml-4" />
             )}
           </Button>
 
