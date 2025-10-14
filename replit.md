@@ -50,7 +50,7 @@ Preferred communication style: Simple, everyday language.
 **Key Components**:
 - `RadioController`: Main controller component managing audio playback, scheduling logic, track info fetching, and user interactions
 - `TimeDisplay`: Real-time clock with Dutch locale formatting
-- `StatusIndicator`: Visual status cards showing radio, day type, and schedule states
+- `StatusIndicator`: Visual status cards showing radio, day type, schedule states, and link to Studio PB.NL
 - `AudioWaveVisualizer`: Animated wave visualization responding to playback state
 - `NowPlayingTrack`: Track information display component showing current song details
 

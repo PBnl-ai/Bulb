@@ -1,4 +1,4 @@
-import { Clock, Calendar, Radio } from "lucide-react";
+import { Clock, Calendar, Radio, Headphones } from "lucide-react";
 
 interface StatusIndicatorProps {
   isPlaying: boolean;
@@ -44,6 +44,22 @@ export default function StatusIndicator({ isPlaying, isWeekday, isScheduledTime 
           </p>
         </div>
       </div>
+
+      <a 
+        href="https://studio.pb.nl" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="flex items-center gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-slate-50 hover-elevate active-elevate-2 transition-all"
+        data-testid="link-radio-maker"
+      >
+        <div className="p-2 md:p-3 rounded-lg md:rounded-xl bg-[#c9c4c0]/50">
+          <Headphones className="w-5 h-5 md:w-6 md:h-6 text-[#444444]" />
+        </div>
+        <div>
+          <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Radio Maker</p>
+          <p className="text-sm md:text-base font-medium text-foreground">STUDIO PB.NL</p>
+        </div>
+      </a>
     </div>
   );
 }

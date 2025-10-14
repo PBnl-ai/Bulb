@@ -187,7 +187,7 @@ export default function RadioController() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center p-4 md:p-8">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-6 md:space-y-8 overflow-hidden">
         <div className="text-center space-y-3 md:space-y-6">
           <img 
