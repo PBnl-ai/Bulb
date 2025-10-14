@@ -41,6 +41,13 @@ export default function RadioController() {
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
     const startMinutes = startHour * 60 + startMinute;
     const endMinutes = endHour * 60 + endMinute;
+    
+    // Schema gaat over middernacht (bijvoorbeeld 22:00 - 02:00)
+    if (endMinutes < startMinutes) {
+      return currentMinutes >= startMinutes || currentMinutes < endMinutes;
+    }
+    
+    // Normaal schema binnen dezelfde dag
     return currentMinutes >= startMinutes && currentMinutes < endMinutes;
   };
 
