@@ -197,13 +197,12 @@ export default function RadioController() {
             data-testid="img-logo"
           />
           <div>
-            <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-wider">
+            <h1 className="text-4xl md:text-5xl uppercase tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
               <span className="text-[#c9c4c0]">PERFECT</span>
               <span className="text-[#444444]">MOODS</span>
             </h1>
             <h2 className="text-base md:text-xl font-light text-muted-foreground mt-1">Lounge webradio</h2>
             <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
-            <p className="text-lg md:text-xl tracking-widest mt-2" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PERFECTLYBASICS</p>
           </div>
         </div>
 
