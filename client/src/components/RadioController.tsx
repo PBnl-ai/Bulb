@@ -10,11 +10,24 @@ const STREAM_URL = "https://play.radioking.io/perfectmoods/104227";
 export default function RadioController() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
-  const [startHour, setStartHour] = useState(8);
-  const [startMinute, setStartMinute] = useState(0);
-  const [endHour, setEndHour] = useState(17);
-  const [endMinute, setEndMinute] = useState(30);
+  const [startHour, setStartHour] = useState(() => {
+    const saved = localStorage.getItem('radio-start-hour');
+    return saved ? parseInt(saved) : 8;
+  });
+  const [startMinute, setStartMinute] = useState(() => {
+    const saved = localStorage.getItem('radio-start-minute');
+    return saved ? parseInt(saved) : 0;
+  });
+  const [endHour, setEndHour] = useState(() => {
+    const saved = localStorage.getItem('radio-end-hour');
+    return saved ? parseInt(saved) : 17;
+  });
+  const [endMinute, setEndMinute] = useState(() => {
+    const saved = localStorage.getItem('radio-end-minute');
+    return saved ? parseInt(saved) : 30;
+  });
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const manualOverrideTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const isWeekday = () => {
     const day = new Date().getDay();
@@ -35,15 +48,39 @@ export default function RadioController() {
 
   useEffect(() => {
     audioRef.current = new Audio(STREAM_URL);
-    audioRef.current.preload = "none";
+    audioRef.current.preload = "auto";
+    
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+    const handleError = (e: Event) => {
+      console.error("Audio error:", e);
+      setIsPlaying(false);
+    };
+    
+    audioRef.current.addEventListener('play', handlePlay);
+    audioRef.current.addEventListener('pause', handlePause);
+    audioRef.current.addEventListener('error', handleError);
 
     return () => {
       if (audioRef.current) {
+        audioRef.current.removeEventListener('play', handlePlay);
+        audioRef.current.removeEventListener('pause', handlePause);
+        audioRef.current.removeEventListener('error', handleError);
         audioRef.current.pause();
         audioRef.current = null;
       }
+      if (manualOverrideTimerRef.current) {
+        clearTimeout(manualOverrideTimerRef.current);
+      }
     };
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('radio-start-hour', startHour.toString());
+    localStorage.setItem('radio-start-minute', startMinute.toString());
+    localStorage.setItem('radio-end-hour', endHour.toString());
+    localStorage.setItem('radio-end-minute', endMinute.toString());
+  }, [startHour, startMinute, endHour, endMinute]);
 
   useEffect(() => {
     const checkSchedule = () => {
@@ -60,15 +97,16 @@ export default function RadioController() {
     const interval = setInterval(checkSchedule, 30000);
 
     return () => clearInterval(interval);
-  }, [isPlaying, isManualOverride]);
+  }, [isPlaying, isManualOverride, startHour, startMinute, endHour, endMinute]);
 
   const playRadio = async () => {
     if (audioRef.current) {
       try {
+        audioRef.current.load();
         await audioRef.current.play();
-        setIsPlaying(true);
       } catch (error) {
         console.error("Failed to play audio:", error);
+        setIsPlaying(false);
       }
     }
   };
@@ -76,7 +114,6 @@ export default function RadioController() {
   const stopRadio = () => {
     if (audioRef.current) {
       audioRef.current.pause();
-      setIsPlaying(false);
     }
   };
 
@@ -89,7 +126,11 @@ export default function RadioController() {
       await playRadio();
     }
 
-    setTimeout(() => {
+    if (manualOverrideTimerRef.current) {
+      clearTimeout(manualOverrideTimerRef.current);
+    }
+    
+    manualOverrideTimerRef.current = setTimeout(() => {
       setIsManualOverride(false);
     }, 60000);
   };
