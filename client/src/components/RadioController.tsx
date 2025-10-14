@@ -57,11 +57,6 @@ export default function RadioController() {
     const handleError = (e: Event) => {
       console.error("Audio error:", e);
       setIsPlaying(false);
-      toast({
-        title: "Audio fout",
-        description: "Kan de radiostream niet afspelen. Probeer het opnieuw.",
-        variant: "destructive",
-      });
     };
     
     audioRef.current.addEventListener('play', handlePlay);
@@ -106,7 +101,7 @@ export default function RadioController() {
     return () => clearInterval(interval);
   }, [isPlaying, isManualOverride, startHour, startMinute, endHour, endMinute]);
 
-  const playRadio = async () => {
+  const playRadio = async (showError = false) => {
     if (audioRef.current) {
       try {
         audioRef.current.load();
@@ -114,11 +109,13 @@ export default function RadioController() {
       } catch (error) {
         console.error("Failed to play audio:", error);
         setIsPlaying(false);
-        toast({
-          title: "Audio fout",
-          description: "Kan de radiostream niet afspelen. Probeer het opnieuw.",
-          variant: "destructive",
-        });
+        if (showError) {
+          toast({
+            title: "Audio fout",
+            description: "Klik op de play knop om de radio te starten.",
+            variant: "destructive",
+          });
+        }
       }
     }
   };
@@ -135,7 +132,7 @@ export default function RadioController() {
     if (isPlaying) {
       stopRadio();
     } else {
-      await playRadio();
+      await playRadio(true);
     }
 
     if (manualOverrideTimerRef.current) {
