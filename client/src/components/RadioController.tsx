@@ -188,7 +188,7 @@ export default function RadioController() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden">
+      <div className="w-full max-w-[28.625rem] md:max-w-[32.625rem] bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden">
         <div className="text-center space-y-2 md:space-y-3">
           <img 
             src="/perfectmoods-logo.png" 
@@ -201,7 +201,7 @@ export default function RadioController() {
               <span className="text-[#c9c4c0]">PERFECT</span>
               <span className="text-[#444444]">MOODS</span>
             </h1>
-            <h2 className="text-base md:text-xl font-light text-muted-foreground mt-1">Lounge webradio</h2>
+            <h2 className="text-base md:text-xl font-light text-muted-foreground -mt-1.5">Lounge webradio</h2>
             <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
           </div>
         </div>

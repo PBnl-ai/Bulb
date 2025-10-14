@@ -20,7 +20,7 @@ export default function TimeDisplay() {
   };
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString("nl-NL", {
+    return date.toLocaleDateString("en-US", {
       weekday: "long",
       year: "numeric",
       month: "long",
@@ -30,10 +30,10 @@ export default function TimeDisplay() {
 
   return (
     <div className="text-center" data-testid="time-display">
-      <h1 className="text-5xl md:text-8xl font-light text-foreground mb-1" data-testid="text-current-time">
+      <h1 className="text-5xl md:text-8xl font-light text-foreground" data-testid="text-current-time">
         {formatTime(currentTime)}
       </h1>
-      <p className="text-base md:text-xl text-muted-foreground capitalize font-light" data-testid="text-current-date">
+      <p className="text-base md:text-xl text-muted-foreground capitalize font-light -mt-1.5" data-testid="text-current-date">
         {formatDate(currentTime)}
       </p>
     </div>
