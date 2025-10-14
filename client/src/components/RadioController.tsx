@@ -162,8 +162,9 @@ export default function RadioController() {
             data-testid="img-logo"
           />
           <div>
-            <h2 className="text-xl md:text-3xl font-light text-foreground">PerfectMoods Lounge webradio</h2>
-            <p className="text-sm md:text-base text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
+            <h1 className="text-5xl md:text-8xl font-bold text-foreground">PerfectMoods</h1>
+            <h2 className="text-base md:text-xl font-light text-muted-foreground mt-1">Lounge webradio</h2>
+            <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
           </div>
         </div>
 
