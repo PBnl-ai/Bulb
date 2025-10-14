@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Play, Pause } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import TimeDisplay from "./TimeDisplay";
 import StatusIndicator from "./StatusIndicator";
 import AudioWaveVisualizer from "./AudioWaveVisualizer";
@@ -8,6 +9,7 @@ import AudioWaveVisualizer from "./AudioWaveVisualizer";
 const STREAM_URL = "https://play.radioking.io/perfectmoods/104227";
 
 export default function RadioController() {
+  const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
   const [startHour, setStartHour] = useState(() => {
@@ -55,6 +57,11 @@ export default function RadioController() {
     const handleError = (e: Event) => {
       console.error("Audio error:", e);
       setIsPlaying(false);
+      toast({
+        title: "Audio fout",
+        description: "Kan de radiostream niet afspelen. Probeer het opnieuw.",
+        variant: "destructive",
+      });
     };
     
     audioRef.current.addEventListener('play', handlePlay);
@@ -107,6 +114,11 @@ export default function RadioController() {
       } catch (error) {
         console.error("Failed to play audio:", error);
         setIsPlaying(false);
+        toast({
+          title: "Audio fout",
+          description: "Kan de radiostream niet afspelen. Probeer het opnieuw.",
+          variant: "destructive",
+        });
       }
     }
   };
@@ -196,7 +208,10 @@ export default function RadioController() {
                       min="0"
                       max="23"
                       value={startHour}
-                      onChange={(e) => setStartHour(parseInt(e.target.value) || 0)}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value) || 0;
+                        setStartHour(Math.min(23, Math.max(0, val)));
+                      }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-start-hour"
                     />
@@ -206,7 +221,10 @@ export default function RadioController() {
                       min="0"
                       max="59"
                       value={startMinute}
-                      onChange={(e) => setStartMinute(parseInt(e.target.value) || 0)}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value) || 0;
+                        setStartMinute(Math.min(59, Math.max(0, val)));
+                      }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-start-minute"
                     />
@@ -220,7 +238,10 @@ export default function RadioController() {
                       min="0"
                       max="23"
                       value={endHour}
-                      onChange={(e) => setEndHour(parseInt(e.target.value) || 0)}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value) || 0;
+                        setEndHour(Math.min(23, Math.max(0, val)));
+                      }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-end-hour"
                     />
@@ -230,7 +251,10 @@ export default function RadioController() {
                       min="0"
                       max="59"
                       value={endMinute}
-                      onChange={(e) => setEndMinute(parseInt(e.target.value) || 0)}
+                      onChange={(e) => {
+                        const val = parseInt(e.target.value) || 0;
+                        setEndMinute(Math.min(59, Math.max(0, val)));
+                      }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-end-minute"
                     />
