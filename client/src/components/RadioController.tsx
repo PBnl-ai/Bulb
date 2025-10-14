@@ -116,13 +116,13 @@ export default function RadioController() {
           <Button
             size="icon"
             onClick={handleToggle}
-            className="w-96 h-96 rounded-full transition-all bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
+            className="w-72 h-72 rounded-full transition-all bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
             data-testid="button-toggle-radio"
           >
             {isPlaying ? (
-              <Pause style={{ width: '300px', height: '300px' }} className="text-[#444444]" />
+              <Pause className="w-44 h-44 text-[#444444]" />
             ) : (
-              <Play style={{ width: '300px', height: '300px' }} className="text-[#444444] ml-12" />
+              <Play className="w-44 h-44 text-[#444444] ml-3" />
             )}
           </Button>
 
