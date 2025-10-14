@@ -326,3 +326,16 @@
     inset: -1px;
   }
 }
+
+@keyframes playBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+.animate-play-bounce {
+  animation: playBounce 1.5s ease-in-out infinite;
+}

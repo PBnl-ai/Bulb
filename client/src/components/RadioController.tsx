@@ -184,7 +184,11 @@ export default function RadioController() {
                 strokeWidth={1.5} 
               />
             ) : (
-              <Play style={{ width: '98px', height: '98px', marginLeft: '8px' }} className="text-[#444444] md:w-48 md:h-48 md:ml-4" strokeWidth={1.5} />
+              <Play 
+                style={{ width: '98px', height: '98px', marginLeft: '8px' }} 
+                className="text-[#444444] md:w-48 md:h-48 md:ml-4 animate-play-bounce" 
+                strokeWidth={1.5} 
+              />
             )}
           </Button>
 
