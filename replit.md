@@ -8,9 +8,12 @@ The application features:
 - Automatic scheduling based on weekday/weekend detection and time ranges
 - Real-time clock and status displays
 - Manual play/pause controls with temporary override functionality
+- Spinning LP disc button displaying current album artwork
+- Live track information display (title, artist, album) from RadioKing API
 - Audio wave visualization for playback feedback
 - Configurable schedule times stored in browser localStorage
 - Brand-consistent design matching Perfect Moods visual identity
+- Full keyboard accessibility with semantic HTML and ARIA labels
 
 ## User Preferences
 
@@ -42,10 +45,11 @@ Preferred communication style: Simple, everyday language.
 - localStorage for persisting schedule configuration (start/end times)
 
 **Key Components**:
-- `RadioController`: Main controller component managing audio playback, scheduling logic, and user interactions
+- `RadioController`: Main controller component managing audio playback, scheduling logic, track info fetching, and user interactions
 - `TimeDisplay`: Real-time clock with Dutch locale formatting
 - `StatusIndicator`: Visual status cards showing radio, day type, and schedule states
 - `AudioWaveVisualizer`: Animated wave visualization responding to playback state
+- `NowPlayingTrack`: Track information display component showing current song details
 
 ### Backend Architecture
 
@@ -87,6 +91,7 @@ Preferred communication style: Simple, everyday language.
 
 **Third-Party Services**:
 - Perfect Moods Radio Stream: `https://play.radioking.io/perfectmoods/104227` (external audio stream)
+- RadioKing API: `https://api.radioking.io/widget/radio/perfectmoods/track/current` (track metadata)
 - Google Fonts: Inter, Architects Daughter, DM Sans, Fira Code, Geist Mono font families
 
 **Database** (Configured):

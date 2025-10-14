@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Music } from "lucide-react";
 
 interface TrackInfo {
@@ -9,43 +8,11 @@ interface TrackInfo {
 }
 
 interface NowPlayingTrackProps {
-  isPlaying: boolean;
+  trackInfo: TrackInfo | null;
 }
 
-export default function NowPlayingTrack({ isPlaying }: NowPlayingTrackProps) {
-  const [trackInfo, setTrackInfo] = useState<TrackInfo | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTrackInfo = async () => {
-      try {
-        const response = await fetch('https://api.radioking.io/widget/radio/perfectmoods/track/current');
-        const data = await response.json();
-        
-        setTrackInfo({
-          title: data.title || 'Onbekend',
-          artist: data.artist || 'Onbekend',
-          album: data.album,
-          cover: data.cover
-        });
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Failed to fetch track info:', error);
-        setIsLoading(false);
-      }
-    };
-
-    if (isPlaying) {
-      fetchTrackInfo();
-      const interval = setInterval(fetchTrackInfo, 30000);
-      return () => clearInterval(interval);
-    } else {
-      setTrackInfo(null);
-      setIsLoading(true);
-    }
-  }, [isPlaying]);
-
-  if (!isPlaying || !trackInfo) {
+export default function NowPlayingTrack({ trackInfo }: NowPlayingTrackProps) {
+  if (!trackInfo) {
     return null;
   }
 

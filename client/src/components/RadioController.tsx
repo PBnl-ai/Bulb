@@ -9,10 +9,18 @@ import NowPlayingTrack from "./NowPlayingTrack";
 
 const STREAM_URL = "https://play.radioking.io/perfectmoods/104227";
 
+interface TrackInfo {
+  title: string;
+  artist: string;
+  album?: string;
+  cover?: string;
+}
+
 export default function RadioController() {
   const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
+  const [trackInfo, setTrackInfo] = useState<TrackInfo | null>(null);
   const [startHour, setStartHour] = useState(() => {
     const saved = localStorage.getItem('radio-start-hour');
     return saved ? parseInt(saved) : 8;
@@ -91,6 +99,32 @@ export default function RadioController() {
     localStorage.setItem('radio-end-hour', endHour.toString());
     localStorage.setItem('radio-end-minute', endMinute.toString());
   }, [startHour, startMinute, endHour, endMinute]);
+
+  useEffect(() => {
+    const fetchTrackInfo = async () => {
+      try {
+        const response = await fetch('https://api.radioking.io/widget/radio/perfectmoods/track/current');
+        const data = await response.json();
+        
+        setTrackInfo({
+          title: data.title || 'Onbekend',
+          artist: data.artist || 'Onbekend',
+          album: data.album,
+          cover: data.cover
+        });
+      } catch (error) {
+        console.error('Failed to fetch track info:', error);
+      }
+    };
+
+    if (isPlaying) {
+      fetchTrackInfo();
+      const interval = setInterval(fetchTrackInfo, 30000);
+      return () => clearInterval(interval);
+    } else {
+      setTrackInfo(null);
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     const checkSchedule = () => {
@@ -175,26 +209,38 @@ export default function RadioController() {
         <TimeDisplay />
 
         <div className="flex flex-col items-center gap-4 md:gap-8">
-          <Button
-            size="icon"
+          <button 
             onClick={handleToggle}
-            className="w-48 h-48 md:w-72 md:h-72 rounded-full transition-all bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
+            className="relative w-48 h-48 md:w-72 md:h-72 cursor-pointer rounded-full border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
+            aria-label={isPlaying ? "Pauzeer radio" : "Start radio"}
             data-testid="button-toggle-radio"
           >
-            {isPlaying ? (
-              <Pause 
-                style={{ width: '98px', height: '98px' }} 
-                className="text-[#444444] md:w-48 md:h-48 animate-pulse" 
-                strokeWidth={1.5} 
-              />
-            ) : (
-              <Play 
-                style={{ width: '98px', height: '98px', marginLeft: '8px' }} 
-                className="text-[#444444] md:w-48 md:h-48 md:ml-4 animate-play-bounce" 
-                strokeWidth={1.5} 
-              />
-            )}
-          </Button>
+            <div 
+              className={`absolute inset-0 ${isPlaying ? 'animate-spin-slow' : ''}`}
+              style={{
+                backgroundImage: trackInfo?.cover 
+                  ? `url(${trackInfo.cover})` 
+                  : 'linear-gradient(135deg, #c9c4c0 0%, #444444 100%)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            />
+            <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
+              {isPlaying ? (
+                <Pause 
+                  style={{ width: '98px', height: '98px' }} 
+                  className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:w-48 md:h-48" 
+                  strokeWidth={1.5} 
+                />
+              ) : (
+                <Play 
+                  style={{ width: '98px', height: '98px', marginLeft: '8px' }} 
+                  className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:w-48 md:h-48 md:ml-4 animate-play-bounce" 
+                  strokeWidth={1.5} 
+                />
+              )}
+            </div>
+          </button>
 
           <div className="text-center flex flex-col gap-0.5 md:gap-1 w-full max-w-2xl">
             <p className={`text-xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
@@ -202,7 +248,7 @@ export default function RadioController() {
             </p>
             <AudioWaveVisualizer isPlaying={isPlaying} />
             <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
-            <NowPlayingTrack isPlaying={isPlaying} />
+            <NowPlayingTrack trackInfo={trackInfo} />
           </div>
         </div>
 
