@@ -173,9 +173,9 @@ export default function RadioController() {
             data-testid="button-toggle-radio"
           >
             {isPlaying ? (
-              <Pause className="w-32 h-32 md:w-48 md:h-48 text-[#444444]" strokeWidth={1.5} />
+              <Pause style={{ width: '140px', height: '140px' }} className="text-[#444444] md:w-48 md:h-48" strokeWidth={1.5} />
             ) : (
-              <Play className="w-32 h-32 md:w-48 md:h-48 ml-3 md:ml-4 text-[#444444]" strokeWidth={1.5} />
+              <Play style={{ width: '140px', height: '140px', marginLeft: '12px' }} className="text-[#444444] md:w-48 md:h-48 md:ml-4" strokeWidth={1.5} />
             )}
           </Button>
 
