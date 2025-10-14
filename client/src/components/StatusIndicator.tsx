@@ -40,7 +40,7 @@ export default function StatusIndicator({ isPlaying, isWeekday, isScheduledTime 
         <div>
           <p className="text-xs text-muted-foreground uppercase tracking-wide">Schema</p>
           <p className={`text-lg font-medium ${isScheduledTime ? "text-foreground" : "text-muted-foreground"}`} data-testid="text-schedule-status">
-            {isScheduledTime ? "Actief" : "Buiten tijden"}
+            {isScheduledTime ? "Actief" : "Het is buiten werktijd"}
           </p>
         </div>
       </div>
