@@ -149,42 +149,42 @@ export default function RadioController() {
 
   return (
     <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-5xl space-y-12">
-        <div className="text-center space-y-6">
+      <div className="w-full max-w-5xl space-y-6 md:space-y-12">
+        <div className="text-center space-y-3 md:space-y-6">
           <img 
             src="/perfectmoods-logo.png" 
             alt="Perfect Moods" 
-            className="h-16 md:h-24 mx-auto"
+            className="h-12 md:h-24 mx-auto"
             data-testid="img-logo"
           />
           <div>
-            <h2 className="text-2xl md:text-3xl font-light text-foreground">Lounge Webradio</h2>
-            <p className="text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
+            <h2 className="text-xl md:text-3xl font-light text-foreground">Lounge Webradio</h2>
+            <p className="text-sm md:text-base text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
           </div>
         </div>
 
         <TimeDisplay />
 
-        <div className="flex flex-col items-center gap-8">
+        <div className="flex flex-col items-center gap-4 md:gap-8">
           <Button
             size="icon"
             onClick={handleToggle}
-            className="w-72 h-72 rounded-full transition-all bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
+            className="w-48 h-48 md:w-72 md:h-72 rounded-full transition-all bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
             data-testid="button-toggle-radio"
           >
             {isPlaying ? (
-              <Pause style={{ width: '200px', height: '200px' }} className="text-[#444444]" strokeWidth={1.5} />
+              <Pause className="w-28 h-28 md:w-48 md:h-48 text-[#444444]" strokeWidth={1.5} />
             ) : (
-              <Play style={{ width: '200px', height: '200px', marginLeft: '16px' }} className="text-[#444444]" strokeWidth={1.5} />
+              <Play className="w-28 h-28 md:w-48 md:h-48 ml-2 md:ml-4 text-[#444444]" strokeWidth={1.5} />
             )}
           </Button>
 
-          <div className="text-center space-y-3">
-            <p className={`text-2xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
+          <div className="text-center space-y-2 md:space-y-3">
+            <p className={`text-xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
               {isPlaying ? "Nu aan het spelen" : "Gestopt"}
             </p>
             <AudioWaveVisualizer isPlaying={isPlaying} />
-            <p className="text-sm text-muted-foreground">320kbps High Quality Sound</p>
+            <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
           </div>
         </div>
 
@@ -194,12 +194,12 @@ export default function RadioController() {
           isScheduledTime={isScheduledTime()} 
         />
 
-        <div className="p-8 rounded-3xl bg-white border border-[#c9c4c0] shadow-lg space-y-6">
-          <h3 className="text-xl font-light text-foreground">Automatisch Schema</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <p className="font-medium text-foreground">Werkdagen (Ma - Vr)</p>
-              <div className="space-y-3">
+        <div className="p-4 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-[#c9c4c0] shadow-lg space-y-4 md:space-y-6">
+          <h3 className="text-lg md:text-xl font-light text-foreground">Automatisch Schema</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            <div className="space-y-3 md:space-y-4">
+              <p className="text-sm md:text-base font-medium text-foreground">Werkdagen (Ma - Vr)</p>
+              <div className="space-y-2 md:space-y-3">
                 <div>
                   <label className="text-sm text-muted-foreground block mb-1">Start tijd</label>
                   <div className="flex gap-2">
@@ -264,14 +264,14 @@ export default function RadioController() {
             </div>
             <div className="space-y-1 flex items-center">
               <div>
-                <p className="font-medium text-foreground">Weekend (Za - Zo)</p>
-                <p className="text-sm text-muted-foreground">Geen automatisch afspelen</p>
+                <p className="text-sm md:text-base font-medium text-foreground">Weekend (Za - Zo)</p>
+                <p className="text-xs md:text-sm text-muted-foreground">Geen automatisch afspelen</p>
               </div>
             </div>
           </div>
           {isManualOverride && (
-            <div className="mt-4 p-4 rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]">
-              <p className="text-sm text-[#444444] font-medium" data-testid="text-manual-override">
+            <div className="mt-3 md:mt-4 p-3 md:p-4 rounded-xl md:rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]">
+              <p className="text-xs md:text-sm text-[#444444] font-medium" data-testid="text-manual-override">
                 Handmatige bediening actief - automatisch schema hervat over 1 minuut
               </p>
             </div>
