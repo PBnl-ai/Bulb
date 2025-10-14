@@ -201,7 +201,7 @@ export default function RadioController() {
               <span className="text-[#c9c4c0]">PERFECT</span>
               <span className="text-[#444444]">MOODS</span>
             </h1>
-            <h2 className="text-base md:text-xl font-light text-muted-foreground -mt-6.5">Lounge webradio</h2>
+            <h2 className="text-base md:text-xl font-light text-muted-foreground -mt-1.5">Lounge webradio</h2>
             <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
           </div>
         </div>
