@@ -188,8 +188,8 @@ export default function RadioController() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-6 md:space-y-8 overflow-hidden">
-        <div className="text-center space-y-3 md:space-y-6">
+      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden">
+        <div className="text-center space-y-2 md:space-y-3">
           <img 
             src="/perfectmoods-logo.png" 
             alt="Perfect Moods" 
@@ -208,10 +208,10 @@ export default function RadioController() {
 
         <TimeDisplay />
 
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-3">
           <button 
             onClick={handleToggle}
-            className="relative w-48 h-48 md:w-56 md:h-56 cursor-pointer rounded-full border-6 md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
+            className="relative w-58 h-58 md:w-68 md:h-68 cursor-pointer rounded-full border-6 md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
             aria-label={isPlaying ? "Pauzeer radio" : "Start radio"}
             data-testid="button-toggle-radio"
           >
@@ -242,8 +242,8 @@ export default function RadioController() {
             </div>
           </button>
 
-          <div className="text-center flex flex-col gap-0.5 md:gap-1 w-full max-w-2xl">
-            <p className={`text-xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
+          <div className="text-center flex flex-col gap-0.5 w-full">
+            <p className={`text-xl md:text-2xl uppercase ${isPlaying ? "font-light text-[#c9c4c0] animate-sway" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
               {isPlaying ? "Nu aan het spelen" : "Gestopt"}
             </p>
             <AudioWaveVisualizer isPlaying={isPlaying} />
@@ -258,9 +258,9 @@ export default function RadioController() {
           isScheduledTime={isScheduledTime()} 
         />
 
-        <div className="p-4 md:p-6 rounded-2xl bg-slate-50 space-y-4">
+        <div className="p-4 md:p-6 rounded-2xl bg-background space-y-3">
           <h3 className="text-base md:text-lg font-medium text-foreground">Automatisch Schema</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             <div className="space-y-3 md:space-y-4">
               <p className="text-sm md:text-base font-medium text-foreground">Werkdagen (Ma - Vr)</p>
               <div className="space-y-2 md:space-y-3">
@@ -341,6 +341,10 @@ export default function RadioController() {
             </div>
           )}
         </div>
+
+        <p className="text-center text-xs text-muted-foreground/60 font-light tracking-wide">
+          COPYRIGHT STUDIO PB.NL 2025
+        </p>
       </div>
     </div>
   );

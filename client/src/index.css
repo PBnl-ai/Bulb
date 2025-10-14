@@ -352,3 +352,16 @@
 .animate-spin-slow {
   animation: spinSlow 8s linear infinite;
 }
+
+@keyframes sway {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-sway {
+  animation: sway 3s ease-in-out infinite;
+}

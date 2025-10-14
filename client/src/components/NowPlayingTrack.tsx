@@ -18,7 +18,7 @@ export default function NowPlayingTrack({ trackInfo }: NowPlayingTrackProps) {
 
   return (
     <div 
-      className="mt-4 p-3 md:p-4 rounded-lg border border-[#c9c4c0] bg-white/50 max-w-md mx-auto"
+      className="mt-4 p-3 md:p-4 rounded-lg border border-[#c9c4c0] bg-white/50 w-full"
       data-testid="container-now-playing-track"
     >
       <div className="flex items-center gap-3">
