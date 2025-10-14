@@ -211,7 +211,7 @@ export default function RadioController() {
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={handleToggle}
-            className="relative w-58 h-58 md:w-68 md:h-68 cursor-pointer rounded-full border-6 md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
+            className="relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer rounded-full border-[6px] md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
             aria-label={isPlaying ? "Pauzeer radio" : "Start radio"}
             data-testid="button-toggle-radio"
           >
@@ -242,12 +242,14 @@ export default function RadioController() {
             </div>
           </button>
 
-          <div className="text-center flex flex-col gap-0.5 w-full">
-            <p className={`text-xl md:text-2xl uppercase ${isPlaying ? "font-light text-[#c9c4c0] animate-sway" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
-              {isPlaying ? "Nu aan het spelen" : "Gestopt"}
-            </p>
-            <AudioWaveVisualizer isPlaying={isPlaying} />
-            <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
+          <div className="w-full">
+            <div className="text-center flex flex-col gap-0.5">
+              <p className={`text-xl md:text-2xl uppercase ${isPlaying ? "font-light text-[#c9c4c0] animate-sway" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
+                {isPlaying ? "Nu aan het spelen" : "Gestopt"}
+              </p>
+              <AudioWaveVisualizer isPlaying={isPlaying} />
+              <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
+            </div>
             <NowPlayingTrack trackInfo={trackInfo} />
           </div>
         </div>
@@ -259,11 +261,11 @@ export default function RadioController() {
         />
 
         <div className="p-4 md:p-6 rounded-2xl bg-background space-y-3">
-          <h3 className="text-base md:text-lg font-medium text-foreground">Automatisch Schema</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            <div className="space-y-3 md:space-y-4">
+          <div className="space-y-3">
+            <p className="text-sm md:text-base font-medium text-foreground">Automatisch Schema</p>
+            <div className="space-y-3">
               <p className="text-sm md:text-base font-medium text-foreground">Werkdagen (Ma - Vr)</p>
-              <div className="space-y-2 md:space-y-3">
+              <div className="space-y-2">
                 <div>
                   <label className="text-sm text-muted-foreground block mb-1">Start tijd</label>
                   <div className="flex gap-2">
@@ -326,11 +328,9 @@ export default function RadioController() {
                 </div>
               </div>
             </div>
-            <div className="space-y-1 flex items-center">
-              <div>
-                <p className="text-sm md:text-base font-medium text-foreground">Weekend (Za - Zo)</p>
-                <p className="text-xs md:text-sm text-muted-foreground">Geen automatisch afspelen</p>
-              </div>
+            <div className="space-y-1">
+              <p className="text-sm md:text-base font-medium text-foreground">Weekend (Za - Zo)</p>
+              <p className="text-xs md:text-sm text-muted-foreground">Geen automatisch afspelen</p>
             </div>
           </div>
           {isManualOverride && (
