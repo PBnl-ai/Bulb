@@ -179,7 +179,7 @@ export default function RadioController() {
             )}
           </Button>
 
-          <div className="text-center space-y-1 md:space-y-2">
+          <div className="text-center flex flex-col gap-0.5 md:gap-1">
             <p className={`text-xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
               {isPlaying ? "Nu aan het spelen" : "Gestopt"}
             </p>
