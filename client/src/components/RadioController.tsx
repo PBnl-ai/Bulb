@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast";
 import TimeDisplay from "./TimeDisplay";
 import StatusIndicator from "./StatusIndicator";
 import AudioWaveVisualizer from "./AudioWaveVisualizer";
+import NowPlayingTrack from "./NowPlayingTrack";
 
 const STREAM_URL = "https://play.radioking.io/perfectmoods/104227";
 
@@ -195,12 +196,13 @@ export default function RadioController() {
             )}
           </Button>
 
-          <div className="text-center flex flex-col gap-0.5 md:gap-1">
+          <div className="text-center flex flex-col gap-0.5 md:gap-1 w-full max-w-2xl">
             <p className={`text-xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
               {isPlaying ? "Nu aan het spelen" : "Gestopt"}
             </p>
             <AudioWaveVisualizer isPlaying={isPlaying} />
             <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
+            <NowPlayingTrack isPlaying={isPlaying} />
           </div>
         </div>
 
