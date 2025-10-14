@@ -5,10 +5,10 @@ interface AudioWaveVisualizerProps {
 export default function AudioWaveVisualizer({ isPlaying }: AudioWaveVisualizerProps) {
   return (
     <div className="flex items-center justify-center gap-1 h-16" data-testid="audio-wave-visualizer">
-      {[...Array(5)].map((_, i) => (
+      {[...Array(10)].map((_, i) => (
         <div
           key={i}
-          className={`w-2 bg-primary rounded-full transition-all ${
+          className={`w-1 bg-primary rounded-full transition-all ${
             isPlaying ? "animate-wave" : "h-4"
           }`}
           style={{

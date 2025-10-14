@@ -203,6 +203,7 @@ export default function RadioController() {
             </h1>
             <h2 className="text-base md:text-xl font-light text-muted-foreground mt-1">Lounge webradio</h2>
             <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
+            <p className="text-lg md:text-xl tracking-widest mt-2" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>PERFECTLYBASICS</p>
           </div>
         </div>
 
@@ -212,7 +213,7 @@ export default function RadioController() {
           <button 
             onClick={handleToggle}
             className="relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer rounded-full border-[6px] md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
-            aria-label={isPlaying ? "Pauzeer radio" : "Start radio"}
+            aria-label={isPlaying ? "Pause radio" : "Start radio"}
             data-testid="button-toggle-radio"
           >
             <div 
@@ -244,8 +245,8 @@ export default function RadioController() {
 
           <div className="w-full">
             <div className="text-center flex flex-col gap-0.5">
-              <p className={`text-xl md:text-2xl uppercase ${isPlaying ? "font-light text-[#c9c4c0] animate-sway" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
-                {isPlaying ? "Nu aan het spelen" : "Gestopt"}
+              <p className={`text-xl md:text-2xl ${isPlaying ? "font-light text-[#c9c4c0] animate-sway" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
+                {isPlaying ? "Now playing" : "Stopped"}
               </p>
               <AudioWaveVisualizer isPlaying={isPlaying} />
               <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
@@ -262,12 +263,12 @@ export default function RadioController() {
 
         <div className="p-4 md:p-6 rounded-2xl bg-background space-y-3">
           <div className="space-y-3">
-            <p className="text-sm md:text-base font-medium text-foreground">Automatisch Schema</p>
+            <p className="text-sm md:text-base font-medium text-foreground">Automatic Schedule</p>
             <div className="space-y-3">
-              <p className="text-sm md:text-base font-medium text-foreground">Werkdagen (Ma - Vr)</p>
+              <p className="text-sm md:text-base font-medium text-foreground">Weekdays (Mon - Fri)</p>
               <div className="space-y-2">
                 <div>
-                  <label className="text-sm text-muted-foreground block mb-1">Start tijd</label>
+                  <label className="text-sm text-muted-foreground block mb-1">Start time</label>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -297,7 +298,7 @@ export default function RadioController() {
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm text-muted-foreground block mb-1">Stop tijd</label>
+                  <label className="text-sm text-muted-foreground block mb-1">Stop time</label>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -329,14 +330,14 @@ export default function RadioController() {
               </div>
             </div>
             <div className="space-y-1">
-              <p className="text-sm md:text-base font-medium text-foreground">Weekend (Za - Zo)</p>
-              <p className="text-xs md:text-sm text-muted-foreground">Geen automatisch afspelen</p>
+              <p className="text-sm md:text-base font-medium text-foreground">Weekend (Sat - Sun)</p>
+              <p className="text-xs md:text-sm text-muted-foreground">No automatic playback</p>
             </div>
           </div>
           {isManualOverride && (
             <div className="mt-3 md:mt-4 p-3 md:p-4 rounded-xl md:rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]">
               <p className="text-xs md:text-sm text-[#444444] font-medium" data-testid="text-manual-override">
-                Handmatige bediening actief - automatisch schema hervat over 1 minuut
+                Manual control active - automatic schedule resumes in 1 minute
               </p>
             </div>
           )}

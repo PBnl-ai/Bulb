@@ -16,7 +16,7 @@ export default function StatusIndicator({ isPlaying, isWeekday, isScheduledTime 
         <div>
           <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Radio Status</p>
           <p className={`text-sm md:text-base font-medium ${isPlaying ? "text-chart-3" : "text-muted-foreground"}`} data-testid="text-radio-status">
-            {isPlaying ? "Aan" : "Uit"}
+            {isPlaying ? "On" : "Off"}
           </p>
         </div>
       </div>
@@ -26,9 +26,9 @@ export default function StatusIndicator({ isPlaying, isWeekday, isScheduledTime 
           <Calendar className={`w-5 h-5 md:w-6 md:h-6 ${isWeekday ? "text-[#444444]" : "text-[#444444]/60"}`} />
         </div>
         <div>
-          <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Dag Type</p>
+          <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Day Type</p>
           <p className={`text-sm md:text-base font-medium ${isWeekday ? "text-foreground" : "text-muted-foreground"}`} data-testid="text-day-type">
-            {isWeekday ? "Werkdag" : "Weekend"}
+            {isWeekday ? "Weekday" : "Weekend"}
           </p>
         </div>
       </div>
@@ -38,9 +38,9 @@ export default function StatusIndicator({ isPlaying, isWeekday, isScheduledTime 
           <Clock className={`w-5 h-5 md:w-6 md:h-6 ${isScheduledTime ? "text-[#444444]" : "text-[#444444]/60"}`} />
         </div>
         <div>
-          <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Schema</p>
+          <p className="text-[10px] md:text-xs text-muted-foreground uppercase tracking-wide">Schedule</p>
           <p className={`text-sm md:text-base font-medium ${isScheduledTime ? "text-foreground" : "text-muted-foreground"}`} data-testid="text-schedule-status">
-            {isScheduledTime ? "Actief" : "Het is buiten werktijd"}
+            {isScheduledTime ? "Active" : "Outside working hours"}
           </p>
         </div>
       </div>
