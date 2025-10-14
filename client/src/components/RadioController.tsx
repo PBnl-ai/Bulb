@@ -127,7 +127,7 @@ export default function RadioController() {
           </Button>
 
           <div className="text-center space-y-3">
-            <p className={`text-2xl md:text-3xl font-light ${isPlaying ? "text-chart-3" : "text-muted-foreground"}`} data-testid="text-now-playing">
+            <p className={`text-2xl md:text-3xl ${isPlaying ? "font-light text-chart-3" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
               {isPlaying ? "Nu aan het spelen" : "Gestopt"}
             </p>
             <AudioWaveVisualizer isPlaying={isPlaying} />
