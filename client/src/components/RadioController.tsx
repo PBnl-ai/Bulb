@@ -101,7 +101,7 @@ export default function RadioController() {
     };
 
     checkSchedule();
-    const interval = setInterval(checkSchedule, 30000);
+    const interval = setInterval(checkSchedule, 5000);
 
     return () => clearInterval(interval);
   }, [isPlaying, isManualOverride, startHour, startMinute, endHour, endMinute]);
