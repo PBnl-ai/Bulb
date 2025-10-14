@@ -16,65 +16,65 @@
 
   --background: 0 0% 100%;
 
-  --foreground: 270 15% 12%;
+  --foreground: 220 20% 20%;
 
-  --border: 270 8% 88%;
+  --border: 220 15% 90%;
 
-  --card: 270 5% 98%;
+  --card: 0 0% 98%;
 
-  --card-foreground: 270 15% 12%;
+  --card-foreground: 220 20% 20%;
 
-  --card-border: 270 8% 92%;
+  --card-border: 220 15% 92%;
 
-  --sidebar: 270 6% 95%;
+  --sidebar: 220 15% 96%;
 
-  --sidebar-foreground: 270 15% 12%;
+  --sidebar-foreground: 220 20% 20%;
 
-  --sidebar-border: 270 8% 88%;
+  --sidebar-border: 220 15% 90%;
 
-  --sidebar-primary: 270 65% 25%;
+  --sidebar-primary: 220 70% 50%;
 
-  --sidebar-primary-foreground: 270 10% 98%;
+  --sidebar-primary-foreground: 0 0% 100%;
 
-  --sidebar-accent: 270 12% 90%;
+  --sidebar-accent: 220 20% 92%;
 
-  --sidebar-accent-foreground: 270 65% 25%;
+  --sidebar-accent-foreground: 220 70% 50%;
 
-  --sidebar-ring: 270 70% 50%;
+  --sidebar-ring: 220 70% 50%;
 
-  --popover: 270 6% 94%;
+  --popover: 0 0% 96%;
 
-  --popover-foreground: 270 15% 12%;
+  --popover-foreground: 220 20% 20%;
 
-  --popover-border: 270 8% 86%;
+  --popover-border: 220 15% 88%;
 
-  --primary: 270 65% 25%;
+  --primary: 220 70% 50%;
 
-  --primary-foreground: 270 10% 98%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 270 8% 88%;
+  --secondary: 220 15% 92%;
 
-  --secondary-foreground: 270 65% 25%;
+  --secondary-foreground: 220 70% 50%;
 
-  --muted: 270 10% 92%;
+  --muted: 220 15% 94%;
 
-  --muted-foreground: 270 30% 40%;
+  --muted-foreground: 220 15% 45%;
 
-  --accent: 270 15% 90%;
+  --accent: 200 80% 95%;
 
-  --accent-foreground: 270 65% 25%;
+  --accent-foreground: 220 70% 50%;
 
-  --destructive: 0 72% 35%;
+  --destructive: 0 72% 50%;
 
-  --destructive-foreground: 0 10% 98%;
+  --destructive-foreground: 0 0% 100%;
 
-  --input: 270 20% 65%;
-  --ring: 270 70% 50%;
-  --chart-1: 270 65% 25%;
-  --chart-2: 270 70% 50%;
-  --chart-3: 142 70% 35%;
-  --chart-4: 220 65% 35%;
-  --chart-5: 30 70% 35%;
+  --input: 220 20% 70%;
+  --ring: 220 70% 50%;
+  --chart-1: 220 70% 50%;
+  --chart-2: 200 75% 55%;
+  --chart-3: 142 65% 50%;
+  --chart-4: 280 60% 60%;
+  --chart-5: 30 70% 55%;
 
   --font-sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
   --font-serif: Georgia, serif;

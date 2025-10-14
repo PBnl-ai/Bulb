@@ -95,11 +95,18 @@ export default function RadioController() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-background via-accent/30 to-background flex items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-5xl space-y-12">
-        <div className="text-center space-y-4">
-          <div className="inline-block px-6 py-2 rounded-full bg-primary/20 border border-primary/30">
-            <p className="text-primary font-semibold text-lg" data-testid="text-brand">Perfect Moods Radio</p>
+        <div className="text-center space-y-6">
+          <img 
+            src="/perfectmoods-logo.png" 
+            alt="Perfect Moods" 
+            className="h-16 md:h-24 mx-auto"
+            data-testid="img-logo"
+          />
+          <div>
+            <h2 className="text-2xl md:text-3xl font-light text-foreground">Lounge Webradio</h2>
+            <p className="text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
           </div>
         </div>
 
@@ -109,25 +116,26 @@ export default function RadioController() {
           <Button
             size="icon"
             onClick={handleToggle}
-            className={`w-48 h-48 md:w-64 md:h-64 rounded-full transition-all shadow-2xl ${
+            className={`w-40 h-40 md:w-56 md:h-56 rounded-full transition-all shadow-xl ${
               isPlaying
-                ? "bg-primary hover:bg-primary border-4 border-primary-border"
-                : "bg-muted hover:bg-muted border-4 border-muted-border"
+                ? "bg-primary hover:bg-primary/90 border-2 border-primary/30"
+                : "bg-white hover:bg-gray-50 border-2 border-gray-200"
             }`}
             data-testid="button-toggle-radio"
           >
             {isPlaying ? (
-              <Pause className="w-24 h-24 md:w-32 md:h-32 text-primary-foreground" />
+              <Pause className="w-20 h-20 md:w-28 md:h-28 text-primary-foreground" />
             ) : (
-              <Play className="w-24 h-24 md:w-32 md:h-32 text-muted-foreground ml-2" />
+              <Play className="w-20 h-20 md:w-28 md:h-28 text-gray-400 ml-2" />
             )}
           </Button>
 
-          <div className="text-center space-y-2">
-            <p className={`text-3xl font-bold ${isPlaying ? "text-chart-3" : "text-muted-foreground"}`} data-testid="text-now-playing">
+          <div className="text-center space-y-3">
+            <p className={`text-2xl md:text-3xl font-light ${isPlaying ? "text-chart-3" : "text-muted-foreground"}`} data-testid="text-now-playing">
               {isPlaying ? "Nu aan het spelen" : "Gestopt"}
             </p>
             <AudioWaveVisualizer isPlaying={isPlaying} />
+            <p className="text-sm text-muted-foreground">320kbps High Quality Sound</p>
           </div>
         </div>
 
@@ -137,21 +145,21 @@ export default function RadioController() {
           isScheduledTime={isScheduledTime()} 
         />
 
-        <div className="p-8 rounded-2xl bg-card border border-card-border space-y-4">
-          <h3 className="text-xl font-semibold text-foreground">Automatisch Schema</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-muted-foreground">
-            <div>
+        <div className="p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg space-y-6">
+          <h3 className="text-xl font-light text-foreground">Automatisch Schema</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-muted-foreground">
+            <div className="space-y-1">
               <p className="font-medium text-foreground">Werkdagen (Ma - Vr)</p>
-              <p>Start: 08:00</p>
-              <p>Stop: 17:30</p>
+              <p className="text-sm">Start: 08:00</p>
+              <p className="text-sm">Stop: 17:30</p>
             </div>
-            <div>
+            <div className="space-y-1">
               <p className="font-medium text-foreground">Weekend (Za - Zo)</p>
-              <p>Geen automatisch afspelen</p>
+              <p className="text-sm">Geen automatisch afspelen</p>
             </div>
           </div>
           {isManualOverride && (
-            <div className="mt-4 p-4 rounded-xl bg-primary/10 border border-primary/20">
+            <div className="mt-4 p-4 rounded-2xl bg-primary/10 border border-primary/30">
               <p className="text-sm text-primary font-medium" data-testid="text-manual-override">
                 Handmatige bediening actief - automatisch schema hervat over 1 minuut
               </p>
