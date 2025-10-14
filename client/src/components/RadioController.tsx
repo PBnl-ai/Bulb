@@ -189,11 +189,11 @@ export default function RadioController() {
   return (
     <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-[28.625rem] md:max-w-[32.625rem] bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden">
-        <div className="text-center space-y-2 md:space-y-3">
+        <div className="text-center space-y-0.5 md:space-y-1">
           <img 
             src="/perfectmoods-logo.png" 
             alt="Perfect Moods" 
-            className="h-12 md:h-24 mx-auto"
+            className="h-[3.6rem] md:h-[7.2rem] mx-auto"
             data-testid="img-logo"
           />
           <div>
