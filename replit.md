@@ -34,10 +34,13 @@ Preferred communication style: Simple, everyday language.
 
 **Styling**: 
 - Tailwind CSS with custom configuration for Perfect Moods brand colors
-- CSS variables for theming (dark mode default)
-- Custom color palette centered on deep purple/violet branding (HSL: 270 65% 25%)
-- Supporting colors include success green and neutral grays
+- Phone-frame UI design with centered white container and gradient background
+- Container with rounded corners (3xl on mobile, 2.5rem on desktop) and large shadow
+- Maximum width: md (448px) on mobile, lg (512px) on desktop
+- Custom color palette centered on Perfect Moods beige (#c9c4c0) and dark gray (#444444)
+- Supporting colors include success green, neutral grays, and slate tones for backgrounds
 - Typography using Inter font family with specific type scales for different content types
+- Responsive layout with maximum 2 columns on desktop for better mobile-like experience
 
 **State Management**: 
 - React hooks (useState, useEffect, useRef) for local component state

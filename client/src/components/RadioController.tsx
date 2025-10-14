@@ -187,8 +187,8 @@ export default function RadioController() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-5xl space-y-6 md:space-y-12">
+    <div className="min-h-screen bg-gradient-to-br from-slate-300 to-slate-400 flex items-center justify-center p-4 md:p-8">
+      <div className="w-full max-w-md md:max-w-lg bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-6 md:space-y-8 overflow-hidden">
         <div className="text-center space-y-3 md:space-y-6">
           <img 
             src="/perfectmoods-logo.png" 
@@ -208,10 +208,10 @@ export default function RadioController() {
 
         <TimeDisplay />
 
-        <div className="flex flex-col items-center gap-4 md:gap-8">
+        <div className="flex flex-col items-center gap-4">
           <button 
             onClick={handleToggle}
-            className="relative w-48 h-48 md:w-72 md:h-72 cursor-pointer rounded-full border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
+            className="relative w-48 h-48 md:w-56 md:h-56 cursor-pointer rounded-full border-6 md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
             aria-label={isPlaying ? "Pauzeer radio" : "Start radio"}
             data-testid="button-toggle-radio"
           >
@@ -228,14 +228,14 @@ export default function RadioController() {
             <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
               {isPlaying ? (
                 <Pause 
-                  style={{ width: '98px', height: '98px' }} 
-                  className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:w-48 md:h-48" 
+                  style={{ width: '80px', height: '80px' }} 
+                  className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:w-32 md:h-32" 
                   strokeWidth={1.5} 
                 />
               ) : (
                 <Play 
-                  style={{ width: '98px', height: '98px', marginLeft: '8px' }} 
-                  className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:w-48 md:h-48 md:ml-4 animate-play-bounce" 
+                  style={{ width: '80px', height: '80px', marginLeft: '8px' }} 
+                  className="text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)] md:w-32 md:h-32 md:ml-4 animate-play-bounce" 
                   strokeWidth={1.5} 
                 />
               )}
@@ -258,8 +258,8 @@ export default function RadioController() {
           isScheduledTime={isScheduledTime()} 
         />
 
-        <div className="p-4 md:p-8 rounded-2xl md:rounded-3xl bg-white border border-[#c9c4c0] shadow-lg space-y-4 md:space-y-6">
-          <h3 className="text-lg md:text-xl font-light text-foreground">Automatisch Schema</h3>
+        <div className="p-4 md:p-6 rounded-2xl bg-slate-50 space-y-4">
+          <h3 className="text-base md:text-lg font-medium text-foreground">Automatisch Schema</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             <div className="space-y-3 md:space-y-4">
               <p className="text-sm md:text-base font-medium text-foreground">Werkdagen (Ma - Vr)</p>
