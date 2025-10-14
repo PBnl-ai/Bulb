@@ -197,7 +197,7 @@ export default function RadioController() {
             data-testid="img-logo"
           />
           <div>
-            <h1 className="text-4xl md:text-5xl uppercase tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
+            <h1 className="text-[2.7rem] md:text-[3.6rem] uppercase tracking-wider" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
               <span className="text-[#c9c4c0]">PERFECT</span>
               <span className="text-[#444444]">MOODS</span>
             </h1>
