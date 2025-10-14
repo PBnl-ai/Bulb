@@ -6,14 +6,14 @@ import StatusIndicator from "./StatusIndicator";
 import AudioWaveVisualizer from "./AudioWaveVisualizer";
 
 const STREAM_URL = "https://play.radioking.io/perfectmoods/104227";
-const START_HOUR = 8;
-const START_MINUTE = 0;
-const END_HOUR = 17;
-const END_MINUTE = 30;
 
 export default function RadioController() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
+  const [startHour, setStartHour] = useState(8);
+  const [startMinute, setStartMinute] = useState(0);
+  const [endHour, setEndHour] = useState(17);
+  const [endMinute, setEndMinute] = useState(30);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const isWeekday = () => {
@@ -24,8 +24,8 @@ export default function RadioController() {
   const isScheduledTime = () => {
     const now = new Date();
     const currentMinutes = now.getHours() * 60 + now.getMinutes();
-    const startMinutes = START_HOUR * 60 + START_MINUTE;
-    const endMinutes = END_HOUR * 60 + END_MINUTE;
+    const startMinutes = startHour * 60 + startMinute;
+    const endMinutes = endHour * 60 + endMinute;
     return currentMinutes >= startMinutes && currentMinutes < endMinutes;
   };
 
@@ -95,7 +95,7 @@ export default function RadioController() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-accent/30 to-background flex items-center justify-center p-4 md:p-8">
+    <div className="min-h-screen bg-white flex items-center justify-center p-4 md:p-8">
       <div className="w-full max-w-5xl space-y-12">
         <div className="text-center space-y-6">
           <img 
@@ -116,17 +116,17 @@ export default function RadioController() {
           <Button
             size="icon"
             onClick={handleToggle}
-            className={`w-40 h-40 md:w-56 md:h-56 rounded-full transition-all shadow-xl ${
+            className={`w-64 h-64 md:w-80 md:h-80 rounded-full transition-all ${
               isPlaying
-                ? "bg-primary hover:bg-primary/90 border-2 border-primary/30"
-                : "bg-white hover:bg-gray-50 border-2 border-gray-200"
+                ? "bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
+                : "bg-[#c9c4c0] hover:bg-[#c9c4c0]/90 shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1),inset_0_-4px_8px_rgba(0,0,0,0.1)]"
             }`}
             data-testid="button-toggle-radio"
           >
             {isPlaying ? (
-              <Pause className="w-20 h-20 md:w-28 md:h-28 text-primary-foreground" />
+              <Pause className="w-32 h-32 md:w-40 md:h-40 text-[#444444]" />
             ) : (
-              <Play className="w-20 h-20 md:w-28 md:h-28 text-gray-400 ml-2" />
+              <Play className="w-32 h-32 md:w-40 md:h-40 text-[#444444] ml-4" />
             )}
           </Button>
 
@@ -145,22 +145,72 @@ export default function RadioController() {
           isScheduledTime={isScheduledTime()} 
         />
 
-        <div className="p-8 rounded-3xl bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg space-y-6">
+        <div className="p-8 rounded-3xl bg-white border border-[#c9c4c0] shadow-lg space-y-6">
           <h3 className="text-xl font-light text-foreground">Automatisch Schema</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-muted-foreground">
-            <div className="space-y-1">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
               <p className="font-medium text-foreground">Werkdagen (Ma - Vr)</p>
-              <p className="text-sm">Start: 08:00</p>
-              <p className="text-sm">Stop: 17:30</p>
+              <div className="space-y-3">
+                <div>
+                  <label className="text-sm text-muted-foreground block mb-1">Start tijd</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      min="0"
+                      max="23"
+                      value={startHour}
+                      onChange={(e) => setStartHour(parseInt(e.target.value) || 0)}
+                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      data-testid="input-start-hour"
+                    />
+                    <span className="flex items-center text-foreground">:</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="59"
+                      value={startMinute}
+                      onChange={(e) => setStartMinute(parseInt(e.target.value) || 0)}
+                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      data-testid="input-start-minute"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-sm text-muted-foreground block mb-1">Stop tijd</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="number"
+                      min="0"
+                      max="23"
+                      value={endHour}
+                      onChange={(e) => setEndHour(parseInt(e.target.value) || 0)}
+                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      data-testid="input-end-hour"
+                    />
+                    <span className="flex items-center text-foreground">:</span>
+                    <input
+                      type="number"
+                      min="0"
+                      max="59"
+                      value={endMinute}
+                      onChange={(e) => setEndMinute(parseInt(e.target.value) || 0)}
+                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      data-testid="input-end-minute"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="space-y-1">
-              <p className="font-medium text-foreground">Weekend (Za - Zo)</p>
-              <p className="text-sm">Geen automatisch afspelen</p>
+            <div className="space-y-1 flex items-center">
+              <div>
+                <p className="font-medium text-foreground">Weekend (Za - Zo)</p>
+                <p className="text-sm text-muted-foreground">Geen automatisch afspelen</p>
+              </div>
             </div>
           </div>
           {isManualOverride && (
-            <div className="mt-4 p-4 rounded-2xl bg-primary/10 border border-primary/30">
-              <p className="text-sm text-primary font-medium" data-testid="text-manual-override">
+            <div className="mt-4 p-4 rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]">
+              <p className="text-sm text-[#444444] font-medium" data-testid="text-manual-override">
                 Handmatige bediening actief - automatisch schema hervat over 1 minuut
               </p>
             </div>
