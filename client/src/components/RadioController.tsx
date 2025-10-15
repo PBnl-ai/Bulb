@@ -1,7 +1,15 @@
 import { useEffect, useState, useRef } from "react";
-import { Play, Pause } from "lucide-react";
+import { Play, Pause, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import TimeDisplay from "./TimeDisplay";
 import StatusIndicator from "./StatusIndicator";
 import AudioWaveVisualizer from "./AudioWaveVisualizer";
@@ -372,9 +380,103 @@ export default function RadioController() {
           )}
         </div>
 
-        <p className="text-center text-xs text-muted-foreground/60 font-light tracking-wide">
-          COPYRIGHT STUDIO PB.NL 2025
-        </p>
+        <div className="text-center space-y-1">
+          <Dialog>
+            <DialogTrigger asChild>
+              <button 
+                className="text-xs text-[#c9c4c0] hover:text-[#444444] transition-colors underline flex items-center gap-1 mx-auto"
+                data-testid="button-autostart-instructions"
+              >
+                <Info className="w-3 h-3" />
+                Autostart Instructions
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl text-[#444444]">Automatic Radio Playback Setup</DialogTitle>
+                <DialogDescription className="text-base">
+                  Choose the best method for your canteen to enable automatic radio control
+                </DialogDescription>
+              </DialogHeader>
+              
+              <div className="space-y-6 mt-4">
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3 p-4 bg-[#c9c4c0]/10 rounded-lg border border-[#c9c4c0]/30">
+                    <div className="w-8 h-8 rounded-full bg-[#c9c4c0] text-white flex items-center justify-center font-bold shrink-0">1</div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-[#444444] text-lg">Safari Settings (Recommended)</h3>
+                      <p className="text-sm text-muted-foreground">Easiest option for iPad - one-time setup, works forever:</p>
+                      <ol className="text-sm space-y-1 list-decimal list-inside ml-2 text-foreground">
+                        <li>Open <strong>Settings</strong> app on iPad</li>
+                        <li>Scroll down to <strong>Safari</strong></li>
+                        <li>Tap <strong>Settings for Websites</strong></li>
+                        <li>Select <strong>Auto-Play</strong></li>
+                        <li>Find this website and select <strong>"Allow All Auto-Play"</strong></li>
+                      </ol>
+                      <p className="text-sm font-medium text-[#c9c4c0] mt-2">✓ After this, radio starts automatically every day!</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 bg-[#c9c4c0]/10 rounded-lg border border-[#c9c4c0]/30">
+                    <div className="w-8 h-8 rounded-full bg-[#c9c4c0] text-white flex items-center justify-center font-bold shrink-0">2</div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-[#444444] text-lg">Keep Page Open 24/7</h3>
+                      <p className="text-sm text-muted-foreground">Leave iPad on with this page open:</p>
+                      <ol className="text-sm space-y-1 list-decimal list-inside ml-2 text-foreground">
+                        <li>Tap anywhere on the page <strong>once</strong> (unlocks audio)</li>
+                        <li>Leave page open - <strong>do NOT refresh/reload</strong></li>
+                        <li>Enable <strong>"Prevent Auto-Lock"</strong> in iPad settings</li>
+                        <li>Keep iPad plugged in to power</li>
+                      </ol>
+                      <p className="text-sm font-medium text-[#c9c4c0] mt-2">✓ Radio works automatically as long as page stays open</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 bg-[#c9c4c0]/10 rounded-lg border border-[#c9c4c0]/30">
+                    <div className="w-8 h-8 rounded-full bg-[#c9c4c0] text-white flex items-center justify-center font-bold shrink-0">3</div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-[#444444] text-lg">Kiosk Browser App</h3>
+                      <p className="text-sm text-muted-foreground">Professional solution for dedicated displays:</p>
+                      <ul className="text-sm space-y-1 list-disc list-inside ml-2 text-foreground">
+                        <li>Install kiosk browser from App Store (e.g., "Kiosk Pro", "Fully Kiosk Browser")</li>
+                        <li>Configure to auto-load this website</li>
+                        <li>Enable auto-play permissions in kiosk settings</li>
+                        <li>Set to prevent sleep/lock</li>
+                      </ul>
+                      <p className="text-sm font-medium text-[#c9c4c0] mt-2">✓ Best for permanent canteen displays</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3 p-4 bg-[#c9c4c0]/10 rounded-lg border border-[#c9c4c0]/30">
+                    <div className="w-8 h-8 rounded-full bg-[#c9c4c0] text-white flex items-center justify-center font-bold shrink-0">4</div>
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-[#444444] text-lg">Guided Access Mode (iOS)</h3>
+                      <p className="text-sm text-muted-foreground">Lock iPad to this app only:</p>
+                      <ol className="text-sm space-y-1 list-decimal list-inside ml-2 text-foreground">
+                        <li>Go to <strong>Settings → Accessibility → Guided Access</strong></li>
+                        <li>Enable Guided Access and set a passcode</li>
+                        <li>Open this page in Safari</li>
+                        <li>Triple-click home/side button to start Guided Access</li>
+                      </ol>
+                      <p className="text-sm font-medium text-[#c9c4c0] mt-2">✓ Prevents accidental app switching</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+                  <p className="text-sm text-amber-800">
+                    <strong>Note:</strong> Browser security prevents automatic audio without user interaction. 
+                    Choose one of the methods above for the best experience in your canteen.
+                  </p>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
+          
+          <p className="text-xs text-muted-foreground/60 font-light tracking-wide">
+            COPYRIGHT STUDIO PB.NL 2025
+          </p>
+        </div>
       </div>
     </div>
   );
