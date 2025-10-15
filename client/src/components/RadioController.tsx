@@ -20,6 +20,7 @@ export default function RadioController() {
   const { toast } = useToast();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
+  const [audioUnlocked, setAudioUnlocked] = useState(false);
   const [trackInfo, setTrackInfo] = useState<TrackInfo | null>(null);
   const [startHour, setStartHour] = useState(() => {
     const saved = localStorage.getItem('radio-start-hour');
@@ -79,6 +80,24 @@ export default function RadioController() {
     audioRef.current.addEventListener('pause', handlePause);
     audioRef.current.addEventListener('error', handleError);
 
+    // Audio unlock on first user interaction
+    const unlockAudio = async () => {
+      if (!audioRef.current || audioUnlocked) return;
+      
+      try {
+        await audioRef.current.play();
+        audioRef.current.pause();
+        audioRef.current.currentTime = 0;
+        setAudioUnlocked(true);
+        console.log('Audio unlocked!');
+      } catch (err) {
+        console.warn('Audio unlock failed:', err);
+      }
+    };
+
+    document.addEventListener('click', unlockAudio, { once: true });
+    document.addEventListener('touchstart', unlockAudio, { once: true });
+
     return () => {
       if (audioRef.current) {
         audioRef.current.removeEventListener('play', handlePlay);
@@ -90,8 +109,10 @@ export default function RadioController() {
       if (manualOverrideTimerRef.current) {
         clearTimeout(manualOverrideTimerRef.current);
       }
+      document.removeEventListener('click', unlockAudio);
+      document.removeEventListener('touchstart', unlockAudio);
     };
-  }, []);
+  }, [audioUnlocked]);
 
   useEffect(() => {
     localStorage.setItem('radio-start-hour', startHour.toString());
@@ -128,7 +149,7 @@ export default function RadioController() {
 
   useEffect(() => {
     const checkSchedule = () => {
-      if (!isManualOverride) {
+      if (!isManualOverride && audioUnlocked) {
         if (shouldAutoPlay() && !isPlaying) {
           playRadio();
         } else if (!shouldAutoPlay() && isPlaying) {
@@ -141,7 +162,7 @@ export default function RadioController() {
     const interval = setInterval(checkSchedule, 5000);
 
     return () => clearInterval(interval);
-  }, [isPlaying, isManualOverride, startHour, startMinute, endHour, endMinute]);
+  }, [isPlaying, isManualOverride, audioUnlocked, startHour, startMinute, endHour, endMinute]);
 
   const playRadio = async (showError = false) => {
     if (audioRef.current) {
@@ -153,8 +174,8 @@ export default function RadioController() {
         setIsPlaying(false);
         if (showError) {
           toast({
-            title: "Audio fout",
-            description: "Klik op de play knop om de radio te starten.",
+            title: "Audio Error",
+            description: "Click the play button to start the radio.",
             variant: "destructive",
           });
         }
@@ -207,6 +228,14 @@ export default function RadioController() {
         </div>
 
         <TimeDisplay />
+
+        {!audioUnlocked && (
+          <div className="bg-[#c9c4c0]/20 border border-[#c9c4c0]/40 rounded-lg p-3 text-center animate-pulse" data-testid="banner-unlock-audio">
+            <p className="text-sm text-[#444444] font-medium">
+              Tap anywhere to enable automatic radio control
+            </p>
+          </div>
+        )}
 
         <div className="flex flex-col items-center gap-3">
           <button 
