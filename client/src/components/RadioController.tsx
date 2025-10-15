@@ -313,8 +313,16 @@ export default function RadioController() {
                       max="23"
                       value={startHour}
                       onChange={(e) => {
-                        const val = e.target.value === '' ? 0 : parseInt(e.target.value);
-                        setStartHour(Math.min(23, Math.max(0, val)));
+                        if (e.target.value === '') return;
+                        const val = parseInt(e.target.value);
+                        if (!isNaN(val)) {
+                          setStartHour(Math.min(23, Math.max(0, val)));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        if (e.target.value === '') {
+                          setStartHour(0);
+                        }
                       }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-start-hour"
@@ -326,8 +334,16 @@ export default function RadioController() {
                       max="59"
                       value={startMinute}
                       onChange={(e) => {
-                        const val = e.target.value === '' ? 0 : parseInt(e.target.value);
-                        setStartMinute(Math.min(59, Math.max(0, val)));
+                        if (e.target.value === '') return;
+                        const val = parseInt(e.target.value);
+                        if (!isNaN(val)) {
+                          setStartMinute(Math.min(59, Math.max(0, val)));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        if (e.target.value === '') {
+                          setStartMinute(0);
+                        }
                       }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-start-minute"
@@ -343,8 +359,16 @@ export default function RadioController() {
                       max="23"
                       value={endHour}
                       onChange={(e) => {
-                        const val = e.target.value === '' ? 0 : parseInt(e.target.value);
-                        setEndHour(Math.min(23, Math.max(0, val)));
+                        if (e.target.value === '') return;
+                        const val = parseInt(e.target.value);
+                        if (!isNaN(val)) {
+                          setEndHour(Math.min(23, Math.max(0, val)));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        if (e.target.value === '') {
+                          setEndHour(0);
+                        }
                       }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-end-hour"
@@ -356,8 +380,16 @@ export default function RadioController() {
                       max="59"
                       value={endMinute}
                       onChange={(e) => {
-                        const val = e.target.value === '' ? 0 : parseInt(e.target.value);
-                        setEndMinute(Math.min(59, Math.max(0, val)));
+                        if (e.target.value === '') return;
+                        const val = parseInt(e.target.value);
+                        if (!isNaN(val)) {
+                          setEndMinute(Math.min(59, Math.max(0, val)));
+                        }
+                      }}
+                      onBlur={(e) => {
+                        if (e.target.value === '') {
+                          setEndMinute(0);
+                        }
                       }}
                       className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
                       data-testid="input-end-minute"
