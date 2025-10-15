@@ -21,6 +21,7 @@ export default function RadioController() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
   const [audioUnlocked, setAudioUnlocked] = useState(false);
+  const [showStartPrompt, setShowStartPrompt] = useState(false);
   const [trackInfo, setTrackInfo] = useState<TrackInfo | null>(null);
   const [startHour, setStartHour] = useState(() => {
     const saved = localStorage.getItem('radio-start-hour');
