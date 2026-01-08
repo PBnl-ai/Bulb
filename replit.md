@@ -57,8 +57,17 @@ Preferred communication style: Simple, everyday language.
 - `NowPlayingTrack`: Track information display component showing current song details
 
 **Theme System**:
-- Light mode: Original Perfect Moods beige (#c9c4c0) and dark gray (#444444) branding on white background
-- Dark mode: Aura CMS-inspired styling with near-black background (#050505), blue accent (#3b82f6), white text
+- Light mode: Original Perfect Moods beige (#c9c4c0) and dark gray (#444444) branding on white background with rounded containers
+- Dark mode: Authentic Aura CMS aesthetic with:
+  - Pure black background (#050505) with 40px tech grid pattern
+  - Animated scanline overlay effect
+  - Frosted glass container (backdrop-blur, translucent borders)
+  - Decorative corner brackets on main container
+  - JetBrains Mono font for technical labels
+  - Uppercase text with wide letter-spacing
+  - Technical label format (e.g., "LOUNGE_WEBRADIO", "[ NOW_PLAYING ]", "SCHEDULE_CONFIG")
+  - Blue accent (#3b82f6) for highlights, white/gray for text
+  - Square corners (rounded-sm) instead of rounded-full
 - Theme toggle button in top-right corner with Moon/Sun icons
 - Theme preference persisted in localStorage under key "radio-theme"
 - Synchronous theme application on page load to prevent flash of wrong theme

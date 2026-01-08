@@ -219,30 +219,52 @@ export default function RadioController() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8 relative">
+    <div className={`min-h-screen flex items-center justify-center p-4 md:p-8 relative ${
+      theme === "dark" ? "bg-[#050505] aura-tech-grid" : "bg-background"
+    }`}>
+      {theme === "dark" && (
+        <>
+          <div className="fixed inset-0 pointer-events-none bg-gradient-radial from-transparent to-black/60" />
+          <div className="fixed inset-0 pointer-events-none aura-scanline" />
+        </>
+      )}
+      
       <button
         onClick={toggleTheme}
-        className="absolute top-4 right-4 p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
+        className={`absolute top-4 right-4 p-2 transition-colors z-20 ${
+          theme === "light" 
+            ? "rounded-full bg-card border border-border hover:bg-accent" 
+            : "rounded-sm bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20"
+        }`}
         aria-label="Toggle theme"
         data-testid="button-toggle-theme"
       >
         {theme === "light" ? (
           <Moon className="w-5 h-5 text-muted-foreground" />
         ) : (
-          <Sun className="w-5 h-5 text-muted-foreground" />
+          <Sun className="w-5 h-5 text-neutral-400 hover:text-white" />
         )}
       </button>
       
-      <div className={`w-full max-w-[28.625rem] md:max-w-[32.625rem] rounded-3xl md:rounded-[2.5rem] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden ${
+      <div className={`relative w-full max-w-[28.625rem] md:max-w-[32.625rem] p-6 md:p-10 space-y-4 md:space-y-5 z-10 ${
         theme === "light" 
-          ? "bg-white shadow-[0_20px_60px_rgba(0,0,0,0.3)]" 
-          : "bg-card border border-border shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+          ? "bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)]" 
+          : "bg-black/40 backdrop-blur-xl rounded-sm border border-white/[0.08]"
       }`}>
+        {theme === "dark" && (
+          <>
+            <div className="aura-corner-tl" />
+            <div className="aura-corner-tr" />
+            <div className="aura-corner-bl" />
+            <div className="aura-corner-br" />
+          </>
+        )}
+        
         <div className="text-center space-y-0.5 md:space-y-1">
           <img 
             src="/perfectmoods-logo.png" 
             alt="Perfect Moods" 
-            className={`h-[3.6rem] md:h-[7.2rem] mx-auto ${theme === "dark" ? "brightness-150" : ""}`}
+            className={`h-[3.6rem] md:h-[7.2rem] mx-auto ${theme === "dark" ? "brightness-150 opacity-90" : ""}`}
             data-testid="img-logo"
           />
           <div>
@@ -250,21 +272,31 @@ export default function RadioController() {
               <span className={theme === "light" ? "text-[#c9c4c0]" : "text-[#3b82f6]"}>PERFECT</span>
               <span className={theme === "light" ? "text-[#444444]" : "text-white"}>MOODS</span>
             </h1>
-            <h2 className="text-base md:text-xl font-light text-muted-foreground mt-0">Lounge webradio</h2>
-            <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
+            <h2 className={`text-base md:text-xl mt-0 ${
+              theme === "light" ? "font-light text-muted-foreground" : "font-mono-tech text-[10px] uppercase tracking-[0.2em] text-neutral-500"
+            }`}>
+              {theme === "light" ? "Lounge webradio" : "LOUNGE_WEBRADIO"}
+            </h2>
+            <p className={`mt-1 ${
+              theme === "light" ? "text-xs md:text-sm text-muted-foreground" : "font-mono-tech text-[9px] text-neutral-600"
+            }`}>
+              The Finest lounge, chillout & Nujazz music 24/7
+            </p>
           </div>
         </div>
 
         <TimeDisplay />
 
         {!audioUnlocked && (
-          <div className={`rounded-lg p-3 text-center animate-pulse ${
+          <div className={`p-3 text-center animate-pulse ${
             theme === "light" 
-              ? "bg-[#c9c4c0]/20 border border-[#c9c4c0]/40" 
-              : "bg-[#3b82f6]/10 border border-[#3b82f6]/30"
+              ? "rounded-lg bg-[#c9c4c0]/20 border border-[#c9c4c0]/40" 
+              : "rounded-sm bg-white/5 border border-dashed border-white/20"
           }`} data-testid="banner-unlock-audio">
-            <p className={`text-sm font-medium ${theme === "light" ? "text-[#444444]" : "text-[#3b82f6]"}`}>
-              Tap anywhere to enable automatic radio control
+            <p className={`font-medium ${
+              theme === "light" ? "text-sm text-[#444444]" : "font-mono-tech text-[10px] uppercase tracking-widest text-neutral-400"
+            }`}>
+              {theme === "light" ? "Tap anywhere to enable automatic radio control" : "[ TAP_TO_UNLOCK_AUDIO ]"}
             </p>
           </div>
         )}
@@ -272,10 +304,10 @@ export default function RadioController() {
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={handleToggle}
-            className={`relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer rounded-full border-[6px] md:border-8 overflow-hidden focus:outline-none focus:ring-4 transition-shadow ${
+            className={`relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer overflow-hidden focus:outline-none transition-all ${
               theme === "light"
-                ? "border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] focus:ring-[#c9c4c0]/50"
-                : "border-[#3b82f6]/50 shadow-[0_8px_30px_rgba(59,130,246,0.3),0_4px_12px_rgba(0,0,0,0.4)] focus:ring-[#3b82f6]/50"
+                ? "rounded-full border-[6px] md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] focus:ring-4 focus:ring-[#c9c4c0]/50"
+                : "rounded-sm border border-white/[0.08] shadow-[0_0_40px_rgba(59,130,246,0.15)] hover:border-white/20 hover:shadow-[0_0_60px_rgba(59,130,246,0.25)]"
             }`}
             aria-label={isPlaying ? "Pause radio" : "Start radio"}
             data-testid="button-toggle-radio"
@@ -309,11 +341,24 @@ export default function RadioController() {
 
           <div className="w-full">
             <div className="text-center flex flex-col gap-0.5">
-              <p className={`text-xl md:text-2xl ${isPlaying ? `font-light animate-sway ${theme === "light" ? "text-[#c9c4c0]" : "text-[#3b82f6]"}` : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
-                {isPlaying ? "Now playing" : "Stopped"}
+              <p className={`${
+                theme === "light" 
+                  ? `text-xl md:text-2xl ${isPlaying ? "font-light animate-sway text-[#c9c4c0]" : "font-bold text-muted-foreground"}`
+                  : `font-mono-tech text-xs uppercase tracking-widest ${isPlaying ? "text-[#3b82f6]" : "text-neutral-600"}`
+              }`} data-testid="text-now-playing">
+                {theme === "light" 
+                  ? (isPlaying ? "Now playing" : "Stopped")
+                  : (isPlaying ? "[ NOW_PLAYING ]" : "[ STREAM_IDLE ]")
+                }
               </p>
               <AudioWaveVisualizer isPlaying={isPlaying} />
-              <p className="text-xs md:text-sm text-muted-foreground">320kbps High Quality Sound</p>
+              <p className={`${
+                theme === "light" 
+                  ? "text-xs md:text-sm text-muted-foreground" 
+                  : "font-mono-tech text-[9px] text-neutral-600 uppercase tracking-wider"
+              }`}>
+                {theme === "light" ? "320kbps High Quality Sound" : "320KBPS_HQ_STREAM"}
+              </p>
             </div>
             <NowPlayingTrack trackInfo={trackInfo} />
           </div>
@@ -325,14 +370,30 @@ export default function RadioController() {
           isScheduledTime={isScheduledTime()} 
         />
 
-        <div className="p-4 md:p-6 rounded-2xl bg-background space-y-3">
+        <div className={`p-4 md:p-6 space-y-3 ${
+          theme === "light" 
+            ? "rounded-2xl bg-background" 
+            : "rounded-sm bg-neutral-900/30 border border-white/[0.05]"
+        }`}>
           <div className="space-y-3">
-            <p className="text-sm md:text-base font-medium text-foreground">Automatic Schedule</p>
+            <p className={`${
+              theme === "light" ? "text-sm md:text-base font-medium text-foreground" : "font-mono-tech text-[10px] uppercase tracking-widest text-neutral-500"
+            }`}>
+              {theme === "light" ? "Automatic Schedule" : "SCHEDULE_CONFIG"}
+            </p>
             <div className="space-y-3">
-              <p className="text-sm md:text-base font-medium text-foreground">Weekdays (Mon - Fri)</p>
+              <p className={`${
+                theme === "light" ? "text-sm md:text-base font-medium text-foreground" : "font-mono-tech text-[9px] uppercase tracking-wider text-neutral-400"
+              }`}>
+                {theme === "light" ? "Weekdays (Mon - Fri)" : "MON-FRI_ACTIVE"}
+              </p>
               <div className="space-y-2">
                 <div>
-                  <label className="text-sm text-muted-foreground block mb-1">Start time</label>
+                  <label className={`block mb-1 ${
+                    theme === "light" ? "text-sm text-muted-foreground" : "font-mono-tech text-[9px] uppercase tracking-wider text-neutral-600"
+                  }`}>
+                    {theme === "light" ? "Start time" : "START:"}
+                  </label>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -351,10 +412,14 @@ export default function RadioController() {
                           setStartHour(0);
                         }
                       }}
-                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
+                      className={`w-20 px-3 py-2 border text-center ${
+                        theme === "light" 
+                          ? "rounded-lg border-[#c9c4c0] bg-white" 
+                          : "rounded-sm border-white/10 bg-black/40 text-white font-mono-tech"
+                      }`}
                       data-testid="input-start-hour"
                     />
-                    <span className="flex items-center text-foreground">:</span>
+                    <span className={`flex items-center ${theme === "light" ? "text-foreground" : "text-neutral-500"}`}>:</span>
                     <input
                       type="number"
                       min="0"
@@ -372,13 +437,21 @@ export default function RadioController() {
                           setStartMinute(0);
                         }
                       }}
-                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
+                      className={`w-20 px-3 py-2 border text-center ${
+                        theme === "light" 
+                          ? "rounded-lg border-[#c9c4c0] bg-white" 
+                          : "rounded-sm border-white/10 bg-black/40 text-white font-mono-tech"
+                      }`}
                       data-testid="input-start-minute"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm text-muted-foreground block mb-1">Stop time</label>
+                  <label className={`block mb-1 ${
+                    theme === "light" ? "text-sm text-muted-foreground" : "font-mono-tech text-[9px] uppercase tracking-wider text-neutral-600"
+                  }`}>
+                    {theme === "light" ? "Stop time" : "STOP:"}
+                  </label>
                   <div className="flex gap-2">
                     <input
                       type="number"
@@ -397,10 +470,14 @@ export default function RadioController() {
                           setEndHour(0);
                         }
                       }}
-                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
+                      className={`w-20 px-3 py-2 border text-center ${
+                        theme === "light" 
+                          ? "rounded-lg border-[#c9c4c0] bg-white" 
+                          : "rounded-sm border-white/10 bg-black/40 text-white font-mono-tech"
+                      }`}
                       data-testid="input-end-hour"
                     />
-                    <span className="flex items-center text-foreground">:</span>
+                    <span className={`flex items-center ${theme === "light" ? "text-foreground" : "text-neutral-500"}`}>:</span>
                     <input
                       type="number"
                       min="0"
@@ -418,7 +495,11 @@ export default function RadioController() {
                           setEndMinute(0);
                         }
                       }}
-                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
+                      className={`w-20 px-3 py-2 border text-center ${
+                        theme === "light" 
+                          ? "rounded-lg border-[#c9c4c0] bg-white" 
+                          : "rounded-sm border-white/10 bg-black/40 text-white font-mono-tech"
+                      }`}
                       data-testid="input-end-minute"
                     />
                   </div>
@@ -426,18 +507,31 @@ export default function RadioController() {
               </div>
             </div>
             <div className="space-y-1">
-              <p className="text-sm md:text-base font-medium text-foreground">Weekend (Sat - Sun)</p>
-              <p className="text-xs md:text-sm text-muted-foreground">No automatic playback</p>
+              <p className={`${
+                theme === "light" ? "text-sm md:text-base font-medium text-foreground" : "font-mono-tech text-[9px] uppercase tracking-wider text-neutral-400"
+              }`}>
+                {theme === "light" ? "Weekend (Sat - Sun)" : "SAT-SUN_INACTIVE"}
+              </p>
+              <p className={`${
+                theme === "light" ? "text-xs md:text-sm text-muted-foreground" : "font-mono-tech text-[8px] text-neutral-600"
+              }`}>
+                {theme === "light" ? "No automatic playback" : "// NO_AUTO_PLAY"}
+              </p>
             </div>
           </div>
           {isManualOverride && (
-            <div className={`mt-3 md:mt-4 p-3 md:p-4 rounded-xl md:rounded-2xl ${
+            <div className={`mt-3 md:mt-4 p-3 md:p-4 ${
               theme === "light" 
-                ? "bg-[#c9c4c0]/20 border border-[#c9c4c0]" 
-                : "bg-[#3b82f6]/10 border border-[#3b82f6]/30"
+                ? "rounded-xl md:rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]" 
+                : "rounded-sm bg-[#3b82f6]/10 border border-dashed border-[#3b82f6]/40"
             }`}>
-              <p className={`text-xs md:text-sm font-medium ${theme === "light" ? "text-[#444444]" : "text-[#3b82f6]"}`} data-testid="text-manual-override">
-                Manual control active - automatic schedule resumes in 1 minute
+              <p className={`font-medium ${
+                theme === "light" ? "text-xs md:text-sm text-[#444444]" : "font-mono-tech text-[10px] uppercase tracking-widest text-[#3b82f6]"
+              }`} data-testid="text-manual-override">
+                {theme === "light" 
+                  ? "Manual control active - automatic schedule resumes in 1 minute" 
+                  : "[ MANUAL_OVERRIDE_ACTIVE ] // RESUME: 60s"
+                }
               </p>
             </div>
           )}
