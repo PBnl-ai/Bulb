@@ -11,7 +11,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 function getInitialTheme(): Theme {
   if (typeof window !== "undefined") {
-    const saved = localStorage.getItem("radio-theme");
+    const saved = localStorage.getItem("radio-theme-v2");
     if (saved === "dark" || saved === "light") {
       document.documentElement.classList.toggle("dark", saved === "dark");
       return saved;
@@ -25,7 +25,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useLayoutEffect(() => {
-    localStorage.setItem("radio-theme", theme);
+    localStorage.setItem("radio-theme-v2", theme);
     if (theme === "dark") {
       document.documentElement.classList.add("dark");
     } else {
