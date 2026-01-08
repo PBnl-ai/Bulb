@@ -304,10 +304,10 @@ export default function RadioController() {
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={handleToggle}
-            className={`relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer overflow-hidden focus:outline-none transition-all ${
+            className={`relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer overflow-hidden focus:outline-none transition-all rounded-full ${
               theme === "light"
-                ? "rounded-full border-[6px] md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] focus:ring-4 focus:ring-[#c9c4c0]/50"
-                : "rounded-sm border border-white/[0.08] shadow-[0_0_40px_rgba(59,130,246,0.15)] hover:border-white/20 hover:shadow-[0_0_60px_rgba(59,130,246,0.25)]"
+                ? "border-[6px] md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] focus:ring-4 focus:ring-[#c9c4c0]/50"
+                : "border-2 border-[#c9c4c0]/30 shadow-[0_0_40px_rgba(201,196,192,0.15)] hover:border-[#c9c4c0]/50 hover:shadow-[0_0_60px_rgba(201,196,192,0.25)]"
             }`}
             aria-label={isPlaying ? "Pause radio" : "Start radio"}
             data-testid="button-toggle-radio"
