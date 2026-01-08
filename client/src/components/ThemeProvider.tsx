@@ -16,8 +16,9 @@ function getInitialTheme(): Theme {
       document.documentElement.classList.toggle("dark", saved === "dark");
       return saved;
     }
+    document.documentElement.classList.add("dark");
   }
-  return "light";
+  return "dark";
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {

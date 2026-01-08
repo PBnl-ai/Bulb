@@ -38,27 +38,21 @@ export default function TimeDisplay() {
     return `${weekday} ${day}-${month}-${year}`;
   };
 
+  const isDark = theme === "dark";
+  
   return (
     <div className="text-center" data-testid="time-display">
       <h1 
-        className={`${
-          theme === "light" 
-            ? "text-5xl md:text-8xl font-light text-foreground" 
-            : "font-mono-tech text-4xl md:text-6xl font-normal text-white tracking-wider"
-        }`} 
+        className={`font-mono-tech text-4xl md:text-6xl font-normal tracking-wider ${isDark ? "text-white" : "text-[#444444]"}`} 
         data-testid="text-current-time"
       >
         {formatTime(currentTime)}
       </h1>
       <p 
-        className={`-mt-1.5 ${
-          theme === "light" 
-            ? "text-base md:text-xl text-muted-foreground capitalize font-light" 
-            : "font-mono-tech text-[10px] text-neutral-500 uppercase tracking-widest"
-        }`} 
+        className={`font-mono-tech text-[10px] uppercase tracking-widest -mt-1.5 ${isDark ? "text-neutral-500" : "text-[#444444]/50"}`} 
         data-testid="text-current-date"
       >
-        {theme === "light" ? formatDate(currentTime) : formatDateTech(currentTime)}
+        {formatDateTech(currentTime)}
       </p>
     </div>
   );

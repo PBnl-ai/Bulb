@@ -372,19 +372,31 @@
   100% { transform: translateY(100%); }
 }
 
-.aura-scanline {
+.aura-scanline-dark {
   background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.03), transparent);
   animation: scanline 8s linear infinite;
 }
 
-.aura-tech-grid {
+.aura-scanline-light {
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.02), transparent);
+  animation: scanline 8s linear infinite;
+}
+
+.aura-tech-grid-dark {
   background-size: 40px 40px;
   background-image: 
     linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
 }
 
-.aura-corner-tl {
+.aura-tech-grid-light {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+.aura-corner-tl-dark {
   position: absolute;
   top: 0;
   left: 0;
@@ -394,7 +406,7 @@
   border-left: 1px solid rgba(255,255,255,0.3);
 }
 
-.aura-corner-tr {
+.aura-corner-tr-dark {
   position: absolute;
   top: 0;
   right: 0;
@@ -404,7 +416,7 @@
   border-right: 1px solid rgba(255,255,255,0.3);
 }
 
-.aura-corner-bl {
+.aura-corner-bl-dark {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -414,7 +426,7 @@
   border-left: 1px solid rgba(255,255,255,0.3);
 }
 
-.aura-corner-br {
+.aura-corner-br-dark {
   position: absolute;
   bottom: 0;
   right: 0;
@@ -422,6 +434,46 @@
   height: 12px;
   border-bottom: 1px solid rgba(255,255,255,0.3);
   border-right: 1px solid rgba(255,255,255,0.3);
+}
+
+.aura-corner-tl-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid rgba(201,196,192,0.6);
+  border-left: 1px solid rgba(201,196,192,0.6);
+}
+
+.aura-corner-tr-light {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-top: 1px solid rgba(201,196,192,0.6);
+  border-right: 1px solid rgba(201,196,192,0.6);
+}
+
+.aura-corner-bl-light {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 1px solid rgba(201,196,192,0.6);
+  border-left: 1px solid rgba(201,196,192,0.6);
+}
+
+.aura-corner-br-light {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  border-bottom: 1px solid rgba(201,196,192,0.6);
+  border-right: 1px solid rgba(201,196,192,0.6);
 }
 
 .font-mono-tech {
