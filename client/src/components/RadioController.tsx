@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import { Play, Pause, Info } from "lucide-react";
+import { Play, Pause, Info, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { useTheme } from "./ThemeProvider";
 import {
   Dialog,
   DialogContent,
@@ -26,6 +27,7 @@ interface TrackInfo {
 
 export default function RadioController() {
   const { toast } = useToast();
+  const { theme, toggleTheme } = useTheme();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isManualOverride, setIsManualOverride] = useState(false);
   const [audioUnlocked, setAudioUnlocked] = useState(false);
@@ -217,19 +219,36 @@ export default function RadioController() {
   };
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-[28.625rem] md:max-w-[32.625rem] bg-white rounded-3xl md:rounded-[2.5rem] shadow-[0_20px_60px_rgba(0,0,0,0.3)] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden">
+    <div className="min-h-screen bg-background flex items-center justify-center p-4 md:p-8 relative">
+      <button
+        onClick={toggleTheme}
+        className="absolute top-4 right-4 p-2 rounded-full bg-card border border-border hover:bg-accent transition-colors"
+        aria-label="Toggle theme"
+        data-testid="button-toggle-theme"
+      >
+        {theme === "light" ? (
+          <Moon className="w-5 h-5 text-muted-foreground" />
+        ) : (
+          <Sun className="w-5 h-5 text-muted-foreground" />
+        )}
+      </button>
+      
+      <div className={`w-full max-w-[28.625rem] md:max-w-[32.625rem] rounded-3xl md:rounded-[2.5rem] p-6 md:p-10 space-y-4 md:space-y-5 overflow-hidden ${
+        theme === "light" 
+          ? "bg-white shadow-[0_20px_60px_rgba(0,0,0,0.3)]" 
+          : "bg-card border border-border shadow-[0_20px_60px_rgba(0,0,0,0.8)]"
+      }`}>
         <div className="text-center space-y-0.5 md:space-y-1">
           <img 
             src="/perfectmoods-logo.png" 
             alt="Perfect Moods" 
-            className="h-[3.6rem] md:h-[7.2rem] mx-auto"
+            className={`h-[3.6rem] md:h-[7.2rem] mx-auto ${theme === "dark" ? "brightness-150" : ""}`}
             data-testid="img-logo"
           />
           <div>
             <h1 className="text-[2.7rem] md:text-[3.6rem] uppercase tracking-wider leading-none" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-              <span className="text-[#c9c4c0]">PERFECT</span>
-              <span className="text-[#444444]">MOODS</span>
+              <span className={theme === "light" ? "text-[#c9c4c0]" : "text-[#3b82f6]"}>PERFECT</span>
+              <span className={theme === "light" ? "text-[#444444]" : "text-white"}>MOODS</span>
             </h1>
             <h2 className="text-base md:text-xl font-light text-muted-foreground mt-0">Lounge webradio</h2>
             <p className="text-xs md:text-sm text-muted-foreground mt-1">The Finest lounge, chillout & Nujazz music 24/7</p>
@@ -239,8 +258,12 @@ export default function RadioController() {
         <TimeDisplay />
 
         {!audioUnlocked && (
-          <div className="bg-[#c9c4c0]/20 border border-[#c9c4c0]/40 rounded-lg p-3 text-center animate-pulse" data-testid="banner-unlock-audio">
-            <p className="text-sm text-[#444444] font-medium">
+          <div className={`rounded-lg p-3 text-center animate-pulse ${
+            theme === "light" 
+              ? "bg-[#c9c4c0]/20 border border-[#c9c4c0]/40" 
+              : "bg-[#3b82f6]/10 border border-[#3b82f6]/30"
+          }`} data-testid="banner-unlock-audio">
+            <p className={`text-sm font-medium ${theme === "light" ? "text-[#444444]" : "text-[#3b82f6]"}`}>
               Tap anywhere to enable automatic radio control
             </p>
           </div>
@@ -249,7 +272,11 @@ export default function RadioController() {
         <div className="flex flex-col items-center gap-3">
           <button 
             onClick={handleToggle}
-            className="relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer rounded-full border-[6px] md:border-8 border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] overflow-hidden focus:outline-none focus:ring-4 focus:ring-[#c9c4c0]/50 transition-shadow"
+            className={`relative w-[14.5rem] h-[14.5rem] md:w-[17rem] md:h-[17rem] cursor-pointer rounded-full border-[6px] md:border-8 overflow-hidden focus:outline-none focus:ring-4 transition-shadow ${
+              theme === "light"
+                ? "border-[#c9c4c0] shadow-[0_8px_20px_rgba(0,0,0,0.15),0_4px_8px_rgba(0,0,0,0.1)] focus:ring-[#c9c4c0]/50"
+                : "border-[#3b82f6]/50 shadow-[0_8px_30px_rgba(59,130,246,0.3),0_4px_12px_rgba(0,0,0,0.4)] focus:ring-[#3b82f6]/50"
+            }`}
             aria-label={isPlaying ? "Pause radio" : "Start radio"}
             data-testid="button-toggle-radio"
           >
@@ -282,7 +309,7 @@ export default function RadioController() {
 
           <div className="w-full">
             <div className="text-center flex flex-col gap-0.5">
-              <p className={`text-xl md:text-2xl ${isPlaying ? "font-light text-[#c9c4c0] animate-sway" : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
+              <p className={`text-xl md:text-2xl ${isPlaying ? `font-light animate-sway ${theme === "light" ? "text-[#c9c4c0]" : "text-[#3b82f6]"}` : "font-bold text-muted-foreground"}`} data-testid="text-now-playing">
                 {isPlaying ? "Now playing" : "Stopped"}
               </p>
               <AudioWaveVisualizer isPlaying={isPlaying} />
@@ -324,7 +351,7 @@ export default function RadioController() {
                           setStartHour(0);
                         }
                       }}
-                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
                       data-testid="input-start-hour"
                     />
                     <span className="flex items-center text-foreground">:</span>
@@ -345,7 +372,7 @@ export default function RadioController() {
                           setStartMinute(0);
                         }
                       }}
-                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
                       data-testid="input-start-minute"
                     />
                   </div>
@@ -370,7 +397,7 @@ export default function RadioController() {
                           setEndHour(0);
                         }
                       }}
-                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
                       data-testid="input-end-hour"
                     />
                     <span className="flex items-center text-foreground">:</span>
@@ -391,7 +418,7 @@ export default function RadioController() {
                           setEndMinute(0);
                         }
                       }}
-                      className="w-20 px-3 py-2 border border-[#c9c4c0] rounded-lg text-center bg-white"
+                      className={`w-20 px-3 py-2 border rounded-lg text-center ${theme === "light" ? "border-[#c9c4c0] bg-white" : "border-border bg-card text-foreground"}`}
                       data-testid="input-end-minute"
                     />
                   </div>
@@ -404,8 +431,12 @@ export default function RadioController() {
             </div>
           </div>
           {isManualOverride && (
-            <div className="mt-3 md:mt-4 p-3 md:p-4 rounded-xl md:rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]">
-              <p className="text-xs md:text-sm text-[#444444] font-medium" data-testid="text-manual-override">
+            <div className={`mt-3 md:mt-4 p-3 md:p-4 rounded-xl md:rounded-2xl ${
+              theme === "light" 
+                ? "bg-[#c9c4c0]/20 border border-[#c9c4c0]" 
+                : "bg-[#3b82f6]/10 border border-[#3b82f6]/30"
+            }`}>
+              <p className={`text-xs md:text-sm font-medium ${theme === "light" ? "text-[#444444]" : "text-[#3b82f6]"}`} data-testid="text-manual-override">
                 Manual control active - automatic schedule resumes in 1 minute
               </p>
             </div>
@@ -416,7 +447,9 @@ export default function RadioController() {
           <Dialog>
             <DialogTrigger asChild>
               <button 
-                className="text-xs text-[#c9c4c0] hover:text-[#444444] transition-colors underline flex items-center gap-1 mx-auto"
+                className={`text-xs transition-colors underline flex items-center gap-1 mx-auto ${
+                  theme === "light" ? "text-[#c9c4c0] hover:text-[#444444]" : "text-[#3b82f6] hover:text-white"
+                }`}
                 data-testid="button-autostart-instructions"
               >
                 <Info className="w-3 h-3" />
@@ -425,7 +458,7 @@ export default function RadioController() {
             </DialogTrigger>
             <DialogContent className="max-w-2xl max-h-[80vh] overflow-y-auto">
               <DialogHeader>
-                <DialogTitle className="text-2xl text-[#444444]">Automatic Radio Playback Setup</DialogTitle>
+                <DialogTitle className={`text-2xl ${theme === "light" ? "text-[#444444]" : "text-white"}`}>Automatic Radio Playback Setup</DialogTitle>
                 <DialogDescription className="text-base">
                   Choose the best method for your canteen to enable automatic radio control
                 </DialogDescription>

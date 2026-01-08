@@ -1,0 +1,428 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura CMS // System Interface</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+        /* Technical Grid Background */
+        .tech-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Scanline Animation */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
+        }
+        .scan-overlay {
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.05), transparent);
+            animation: scanline 8s linear infinite;
+        }
+        
+        /* Corner Accents */
+        .corner-bracket {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-color: rgba(255,255,255,0.4);
+            transition: all 0.3s ease;
+        }
+        .group:hover .corner-bracket {
+            border-color: rgba(255,255,255,0.9);
+            width: 12px;
+            height: 12px;
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        aura: {
+                            bg: '#050505',
+                            border: 'rgba(255, 255, 255, 0.08)',
+                            active: '#3b82f6', // Tech blue
+                            success: '#22c55e',
+                            text: '#a3a3a3',
+                            muted: '#525252'
+                        }
+                    },
+                    fontSize: {
+                        'xxs': '0.65rem'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-aura-bg text-aura-text min-h-screen selection:bg-white/10 selection:text-white overflow-hidden flex">
+
+    <!-- Background Layer -->
+    <div class="fixed inset-0 z-0 pointer-events-none tech-grid opacity-60"></div>
+    <div class="fixed inset-0 z-0 pointer-events-none bg-radial-gradient from-transparent to-black/80"></div>
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="relative z-20 w-[260px] flex-shrink-0 border-r border-aura-border bg-black/40 backdrop-blur-xl flex flex-col justify-between">
+        
+       
+        
+        <!-- Sidebar Footer -->
+        <div class="p-4 border-t border-aura-border/50">
+            <div class="flex items-center gap-3 px-2 py-2">
+                <div class="w-8 h-8 rounded bg-gradient-to-tr from-neutral-800 to-neutral-700 border border-white/10"></div>
+                <div class="flex flex-col">
+                    <span class="text-xs text-white font-medium">Admin User</span>
+                    <span class="text-[10px] text-neutral-500 font-mono">ID: 8492-X</span>
+                </div>
+                <button class="ml-auto text-neutral-500 hover:text-white">
+                    <i data-lucide="settings-2" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-1 flex flex-col relative z-10 min-w-0">
+        
+        <!-- Header Bar -->
+        <header class="h-14 border-b border-aura-border bg-black/20 backdrop-blur-sm flex items-center justify-between px-6 md:px-8">
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2 text-xxs font-mono text-neutral-500">
+                    <span class="uppercase tracking-widest">Mode:</span>
+                    <span class="text-white bg-white/10 px-1.5 py-0.5 rounded-sm">GEN_01</span>
+                </div>
+                <div class="w-px h-4 bg-white/10"></div>
+                <div class="flex items-center gap-2 text-xxs font-mono text-neutral-500">
+                    <span class="uppercase tracking-widest">Ref:</span>
+                    <span class="text-neutral-300">7-JA-26 -PB SYSTEM</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                    <span class="text-xxs font-mono text-green-500 uppercase tracking-widest">Online</span>
+                </div>
+                <button class="border border-white/10 hover:border-white/20 hover:bg-white/5 p-1.5 rounded-sm transition-colors text-neutral-400 hover:text-white">
+                    <i data-lucide="bell" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Scrollable Dashboard -->
+        <div class="flex-1 overflow-y-auto p-6 md:p-8 lg:p-10">
+            
+            <!-- SECTION 01: BLOG & SYSTEM -->
+            <div class="mb-10">
+                <div class="flex justify-between items-end border-b border-aura-border pb-2 mb-6 relative">
+                    <div class="flex items-center gap-3">
+                        <h2 class="font-mono text-sm text-white/90 uppercase tracking-widest">01.A Blog element</h2>
+                        <span class="text-[10px] text-neutral-600 font-mono border border-neutral-800 px-1">WRITER_MODE</span>
+                    </div>
+                    
+                    <div class="flex items-center gap-6">
+                        <!-- Digital Clock -->
+                        <div class="flex items-center gap-2 font-mono text-xs text-neutral-400">
+                            <i data-lucide="clock" class="w-3.5 h-3.5"></i>
+                            <span id="sys-clock">00:00:00</span>
+                            <span class="text-[10px] text-neutral-600">UTC</span>
+                        </div>
+                        
+                        <!-- Front-end Button -->
+                        <a href="#" class="flex items-center gap-2 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs px-3 py-1.5 rounded-sm transition-all group">
+                            <span>Front-end</span>
+                            <i data-lucide="arrow-up-right" class="w-3 h-3 text-neutral-400 group-hover:text-white"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- Decorative line cap -->
+                    <div class="absolute bottom-0 left-0 w-16 h-[1px] bg-white/50"></div>
+                    <div class="absolute bottom-[-1px] right-0 w-1 h-1 bg-neutral-600"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 h-[280px]">
+                    
+                    <!-- Main Blog Write Area -->
+                    <div class="lg:col-span-2 h-full border border-aura-border bg-neutral-900/20 hover:bg-neutral-900/30 transition-colors relative group flex flex-col p-6">
+                        <!-- Corners -->
+                        <div class="corner-bracket border-t border-l top-0 left-0"></div>
+                        <div class="corner-bracket border-b border-r bottom-0 right-0"></div>
+
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-aura-active rounded-sm"></div>
+                                <span class="font-mono text-xs text-white uppercase tracking-wider">nieuwe blog</span>
+                            </div>
+                            <i data-lucide="pen-tool" class="w-4 h-4 text-neutral-500 group-hover:text-white transition-colors"></i>
+                        </div>
+
+                        <!-- Pseudo Input Interface -->
+                        <div class="flex-1 flex flex-col justify-center items-center border border-dashed border-white/10 rounded-sm bg-black/20 gap-3 cursor-pointer hover:border-white/20 transition-all">
+                             <div class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center">
+                                <i data-lucide="plus" class="w-5 h-5 text-neutral-400"></i>
+                             </div>
+                             <p class="text-sm text-neutral-400 font-medium">Maak een nieuwe blog</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-3 text-xs font-mono text-neutral-500">
+                             <span class="hover:text-white cursor-pointer">[ Drafts: 4 ]</span>
+                             <span class="hover:text-white cursor-pointer">[ Templates ]</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Latest Blogs Stack -->
+                    <div class="lg:col-span-1 h-full flex flex-col gap-4">
+                        <div class="text-[10px] font-mono text-neutral-500 uppercase tracking-widest mb-1">laatste blogs</div>
+                        
+                        <!-- Blog Card 1 -->
+                        <div class="flex-1 border border-aura-border bg-neutral-900/10 hover:bg-neutral-900/30 p-4 relative group cursor-pointer transition-colors">
+                            <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-neutral-800 group-hover:bg-white transition-colors"></div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[10px] font-mono text-neutral-500">24 Oct</span>
+                                <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                            </div>
+                            <h4 class="text-sm text-white font-medium leading-tight group-hover:text-aura-active transition-colors">The Future of Generative Interface Design</h4>
+                            <p class="text-[10px] text-neutral-500 mt-2 truncate">Exploring new paradigms in UX...</p>
+                        </div>
+
+                        <!-- Blog Card 2 -->
+                        <div class="flex-1 border border-aura-border bg-neutral-900/10 hover:bg-neutral-900/30 p-4 relative group cursor-pointer transition-colors">
+                            <div class="absolute left-0 top-0 bottom-0 w-[2px] bg-neutral-800 group-hover:bg-neutral-600 transition-colors"></div>
+                            <div class="flex justify-between items-start mb-2">
+                                <span class="text-[10px] font-mono text-neutral-500">22 Oct</span>
+                                <div class="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                            </div>
+                            <h4 class="text-sm text-white font-medium leading-tight group-hover:text-aura-active transition-colors">System Architecture v2.4 Release Notes</h4>
+                            <p class="text-[10px] text-neutral-500 mt-2 truncate">Performance improvements and API...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 02: ZAPPA & SYSTEM -->
+            <div class="mb-4">
+                 <div class="flex justify-between items-end border-b border-aura-border pb-2 mb-6 relative">
+                    <h2 class="font-mono text-sm text-white/90 uppercase tracking-widest">01.B zappa module</h2>
+                    <div class="flex items-center gap-2">
+                      <div class="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"></div>
+                        <span class="font-mono text-xxs text-blue-400 uppercase tracking-tight">System Active</span>
+                    </div>
+                    <!-- Decorative line cap -->
+                    <div class="absolute bottom-0 left-0 w-24 h-[1px] bg-white/50"></div>
+                    <div class="absolute bottom-[-3px] left-[100px] w-[3px] h-[3px] bg-white rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[minmax(240px,auto)]">
+                    
+                    <!-- ZAPPA MAIN CARD -->
+                    <div class="col-span-1 md:col-span-2 lg:col-span-8 relative group border border-aura-border bg-neutral-900/30 overflow-hidden min-h-[320px]">
+                        <!-- Technical Border Decorations -->
+                        <div class="absolute -left-[1px] top-8 bottom-8 w-[1px] bg-white/10 flex flex-col justify-between items-center py-4">
+                            <div class="w-[3px] h-[1px] bg-white/40"></div>
+                            <div class="w-[3px] h-[1px] bg-white/40"></div>
+                        </div>
+                        <div class="absolute -right-[1px] top-8 bottom-8 w-[1px] bg-white/10"></div>
+                        
+                        <!-- Top Corners -->
+                        <div class="corner-bracket border-t border-l top-0 left-0"></div>
+                        <div class="corner-bracket border-t border-r top-0 right-0"></div>
+                        <!-- Bottom Corners -->
+                        <div class="corner-bracket border-b border-l bottom-0 left-0"></div>
+                        <div class="corner-bracket border-b border-r bottom-0 right-0"></div>
+
+                        <!-- Image & Overlay -->
+                        <div class="absolute inset-2 overflow-hidden bg-black">
+                            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&amp;w=2070&amp;auto=format&amp;fit=crop" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 group-hover:scale-105 transition-all duration-700 grayscale mix-blend-screen contrast-125" alt="Zappa Model">
+                            
+                            <!-- Internal Badge -->
+                            <div class="absolute top-4 left-4 border border-white/20 bg-black/60 backdrop-blur-md px-3 py-1.5 flex items-center gap-3">
+                                <i data-lucide="fingerprint" class="w-4 h-4 text-white/80"></i>
+                              <p> <span class="font-mono text-xs text-white tracking-wider">ZAPPA_V1.UNDER CONSTRUCTION</span> </p>
+                                <p><span class="font-mono text-xs text-white tracking-wider"><br>
+                                </span></p>
+                            </div>
+
+                            <!-- Floating UI Elements on Image -->
+                            <div class="absolute bottom-4 left-4">
+                                <h3 class="text-3xl font-medium text-white tracking-tight">Zappa Core</h3>
+                                <p class="text-sm text-neutral-400 max-w-md mt-1 border-l-2 border-white/30 pl-3">High-frequency visual processing unit initiated.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TEUN / METRICS CARD -->
+                    <div class="col-span-1 lg:col-span-4 relative group border border-aura-border bg-neutral-900/30 flex flex-col">
+                        <!-- Corners -->
+                        <div class="corner-bracket border-t border-r top-0 right-0"></div>
+                        <div class="corner-bracket border-b border-l bottom-0 left-0"></div>
+                        
+                        <div class="absolute top-0 right-0 p-2 opacity-50">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                <path d="M0 0H20V20" stroke="currentColor" stroke-width="0.5" class="text-white"></path>
+                            </svg>
+                        </div>
+
+                        <div class="p-5 flex-1 flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="font-mono text-xxs text-neutral-500 border border-neutral-800 px-1 py-0.5">SYS_02</span>
+                                <i data-lucide="activity" class="text-neutral-400 w-4 h-4"></i>
+                            </div>
+                            
+                            <h3 class="text-lg font-medium text-white tracking-tight">Teun Carousel</h3>
+                            
+                            <!-- Pseudo Graph -->
+                            <div class="mt-auto space-y-3">
+                                <div class="flex items-center justify-between text-xs text-neutral-500 font-mono">
+                                    <span>Proc. Load</span>
+                                    <span class="text-white">42%</span>
+                                </div>
+                                <div class="w-full bg-neutral-800 h-1 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 h-full w-[42%] bg-neutral-500"></div>
+                                </div>
+                                
+                                <div class="flex items-center justify-between text-xs text-neutral-500 font-mono">
+                                    <span>Mem. Alloc</span>
+                                    <span class="text-white">12%</span>
+                                </div>
+                                <div class="w-full bg-neutral-800 h-1 relative overflow-hidden">
+                                    <div class="absolute top-0 left-0 h-full w-[12%] bg-neutral-500"></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Small decorative footer on card -->
+                        <div class="border-t border-white/5 bg-white/[0.02] p-2 flex justify-between items-center px-4">
+                            <span class="text-[10px] text-neutral-600 font-mono">UPDATED: 2ms AGO</span>
+                            <div class="w-1.5 h-1.5 bg-neutral-700 rounded-full"></div>
+                        </div>
+                    </div>
+
+                    <!-- BLOG / EDITORIAL CARD -->
+                    <div class="col-span-1 md:col-span-1 lg:col-span-4 relative group border border-aura-border bg-neutral-900/30 min-h-[220px]">
+                        <!-- Decorative border elements -->
+                        <div class="absolute -top-1 left-1/2 -translate-x-1/2 w-8 h-[1px] bg-white/40"></div>
+                        <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-[1px] bg-white/40"></div>
+                        
+                        <div class="absolute inset-0 p-5 flex flex-col justify-between z-10">
+                            <div class="flex justify-between items-start">
+                                <span class="font-mono text-xxs text-neutral-500">01.C</span>
+                                <i data-lucide="file-text" class="text-neutral-400 w-4 h-4 group-hover:text-white transition-colors"></i>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-xl font-medium text-white tracking-tight mb-1 group-hover:translate-x-1 transition-transform">Homepage</h3>
+                                <p class="text-sm text-neutral-500">Openingstekst - Sliders - Nav blokken</p>
+                            </div>
+
+                            <div class="w-full h-px bg-white/10 mt-4 relative">
+                                <div class="absolute top-0 left-0 h-full w-0 group-hover:w-full bg-white/40 transition-all duration-700"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Faint BG Pattern -->
+                        <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                    </div>
+
+                    <!-- PROMPTS CARD -->
+                    <div class="col-span-1 md:col-span-1 lg:col-span-4 relative group border border-aura-border bg-neutral-900/30 min-h-[220px]">
+                         <!-- Corners -->
+                        <div class="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/20"></div>
+                        <div class="absolute top-0 right-0 w-2 h-2 border-t border-r border-white/20"></div>
+                        <div class="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-white/20"></div>
+                        <div class="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/20"></div>
+
+                        <div class="absolute inset-0 p-5 flex flex-col z-10">
+                            <div class="flex justify-between items-start mb-auto">
+                                <span class="font-mono text-xxs text-neutral-500">01.D</span>
+                                <i data-lucide="terminal" class="text-neutral-400 w-4 h-4 group-hover:text-white transition-colors"></i>
+                            </div>
+                            
+                            <div class="font-mono text-[10px] text-neutral-500 leading-relaxed mb-4 opacity-50 group-hover:opacity-100 transition-opacity">
+                                &gt; INIT_SEQ_22<br>
+                                &gt; LOAD_PARAMS... OK<br>
+                                &gt; AWAITING_INPUT_
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-medium text-white tracking-tight mb-1 group-hover:translate-x-1 transition-transform">Prompts</h3>
+                                <p class="text-sm text-neutral-500">System inputs configuration.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DIVERSE / HOMEPAGE CARD -->
+                    <div class="col-span-1 lg:col-span-4 relative group border border-aura-border bg-neutral-900/30 min-h-[220px] flex flex-col">
+                        <!-- Technical tab on top border -->
+                        <div class="absolute -top-[1px] right-4 bg-aura-border h-[1px] w-12 flex justify-center">
+                            <div class="bg-black border border-aura-border border-t-0 px-2 py-0.5">
+                                <span class="text-[8px] font-mono text-neutral-500 block">MISC</span>
+                            </div>
+                        </div>
+
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div class="flex justify-between items-start">
+                                <span class="font-mono text-xxs text-neutral-500">01.E</span>
+                                <i data-lucide="layers" class="text-neutral-400 w-4 h-4 group-hover:text-white transition-colors"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="text-xl font-medium text-white tracking-tight mb-2 group-hover:translate-x-1 transition-transform">Diverse</h3>
+                                <div class="flex gap-2 flex-wrap">
+                                    <span class="text-xs border border-white/10 px-2 py-1 text-neutral-400 rounded-sm hover:bg-white/5 cursor-pointer">Newsletter&nbsp;<i data-lucide="arrow-up-right" class="w-3 h-3 text-neutral-400 group-hover:text-white"></i></span>
+									
+                                    <span class="text-xs border border-white/10 px-2 py-1 text-neutral-400 rounded-sm hover:bg-white/5 cursor-pointer">SEO<i data-lucide="arrow-up-right" class="w-3 h-3 text-neutral-400 group-hover:text-white"></i></span>
+                                    <span class="text-xs border border-white/10 px-2 py-1 text-neutral-400 rounded-sm hover:bg-white/5 cursor-pointer">Timeline<i data-lucide="arrow-up-right" class="w-3 h-3 text-neutral-400 group-hover:text-white"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Footer Area -->
+            <div class="mt-12 border-t border-aura-border pt-6 flex flex-col md:flex-row justify-between items-center gap-4 opacity-60">
+                <div class="text-[10px] font-mono text-neutral-500">
+                  PB_CMS // SYSTEMS ONLINE // ENCRYPTED
+              </div>
+                <div class="flex gap-6 text-xs text-neutral-500">
+                    <a href="#" class="hover:text-white transition-colors">Documentation is er niet</a>
+                    <a href="#" class="hover:text-white transition-colors">Support bel peet</a>
+                    <a href="#" class="hover:text-white transition-colors">API Status</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <script>
+        lucide.createIcons();
+        
+        // Simple Clock Script
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            document.getElementById('sys-clock').innerText = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+    </script>
+
+</body></html>

@@ -123,85 +123,85 @@
 }
 
 .dark {
-  --button-outline: rgba(255,255,255, .10);
+  --button-outline: rgba(255,255,255, .08);
   --badge-outline: rgba(255,255,255, .05);
 
-  --opaque-button-border-intensity: 9;  /* In terms of percentages */
+  --opaque-button-border-intensity: 9;
 
-  /* Backgrounds applied on top of other backgrounds when hovered/active */
-  --elevate-1: rgba(255,255,255, .04);
-  --elevate-2: rgba(255,255,255, .09);
+  --elevate-1: rgba(255,255,255, .03);
+  --elevate-2: rgba(255,255,255, .08);
 
-  --background: 270 40% 8%;
+  /* Aura CMS Dark Theme - Pure black tech aesthetic */
+  --background: 0 0% 2%;
 
-  --foreground: 270 10% 95%;
+  --foreground: 0 0% 64%;
 
-  --border: 270 20% 20%;
+  --border: 0 0% 8%;
 
-  --card: 270 30% 12%;
+  --card: 0 0% 5%;
 
-  --card-foreground: 270 10% 95%;
+  --card-foreground: 0 0% 75%;
 
-  --card-border: 270 25% 16%;
+  --card-border: 0 0% 10%;
 
-  --sidebar: 270 35% 10%;
+  --sidebar: 0 0% 3%;
 
-  --sidebar-foreground: 270 10% 95%;
+  --sidebar-foreground: 0 0% 64%;
 
-  --sidebar-border: 270 25% 14%;
+  --sidebar-border: 0 0% 8%;
 
-  --sidebar-primary: 270 65% 25%;
+  --sidebar-primary: 217 91% 60%;
 
-  --sidebar-primary-foreground: 270 10% 98%;
+  --sidebar-primary-foreground: 0 0% 100%;
 
-  --sidebar-accent: 270 30% 18%;
+  --sidebar-accent: 0 0% 10%;
 
-  --sidebar-accent-foreground: 270 70% 85%;
+  --sidebar-accent-foreground: 0 0% 80%;
 
-  --sidebar-ring: 270 70% 50%;
+  --sidebar-ring: 217 91% 60%;
 
-  --popover: 270 32% 15%;
+  --popover: 0 0% 6%;
 
-  --popover-foreground: 270 10% 95%;
+  --popover-foreground: 0 0% 75%;
 
-  --popover-border: 270 28% 20%;
+  --popover-border: 0 0% 12%;
 
-  --primary: 270 65% 28%;
+  --primary: 217 91% 60%;
 
-  --primary-foreground: 270 10% 98%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 270 25% 22%;
+  --secondary: 0 0% 12%;
 
-  --secondary-foreground: 270 15% 90%;
+  --secondary-foreground: 0 0% 75%;
 
-  --muted: 270 25% 20%;
+  --muted: 0 0% 15%;
 
-  --muted-foreground: 270 15% 75%;
+  --muted-foreground: 0 0% 52%;
 
-  --accent: 270 28% 18%;
+  --accent: 0 0% 10%;
 
-  --accent-foreground: 270 15% 90%;
+  --accent-foreground: 0 0% 80%;
 
-  --destructive: 0 72% 32%;
+  --destructive: 0 72% 50%;
 
-  --destructive-foreground: 0 10% 98%;
+  --destructive-foreground: 0 0% 100%;
 
-  --input: 270 25% 35%;
-  --ring: 270 70% 50%;
-  --chart-1: 270 70% 75%;
-  --chart-2: 270 75% 65%;
-  --chart-3: 142 70% 65%;
+  --input: 0 0% 15%;
+  --ring: 217 91% 60%;
+  --chart-1: 217 91% 60%;
+  --chart-2: 142 71% 45%;
+  --chart-3: 0 0% 75%;
   --chart-4: 220 70% 65%;
   --chart-5: 30 75% 65%;
 
-  --shadow-2xs: 0px 1px 2px 0px hsl(270 60% 4% / 0.30);
-  --shadow-xs: 0px 1px 3px 0px hsl(270 60% 4% / 0.40);
-  --shadow-sm: 0px 2px 4px -1px hsl(270 60% 4% / 0.35), 0px 1px 2px -1px hsl(270 60% 4% / 0.25);
-  --shadow: 0px 4px 6px -1px hsl(270 60% 4% / 0.45), 0px 2px 4px -1px hsl(270 60% 4% / 0.30);
-  --shadow-md: 0px 6px 12px -2px hsl(270 60% 4% / 0.50), 0px 3px 6px -2px hsl(270 60% 4% / 0.35);
-  --shadow-lg: 0px 10px 20px -4px hsl(270 60% 4% / 0.55), 0px 4px 8px -2px hsl(270 60% 4% / 0.40);
-  --shadow-xl: 0px 20px 25px -5px hsl(270 60% 4% / 0.60), 0px 10px 12px -3px hsl(270 60% 4% / 0.45);
-  --shadow-2xl: 0px 25px 50px -12px hsl(270 60% 4% / 0.70);
+  --shadow-2xs: 0px 1px 2px 0px hsl(0 0% 0% / 0.50);
+  --shadow-xs: 0px 1px 3px 0px hsl(0 0% 0% / 0.60);
+  --shadow-sm: 0px 2px 4px -1px hsl(0 0% 0% / 0.55), 0px 1px 2px -1px hsl(0 0% 0% / 0.45);
+  --shadow: 0px 4px 6px -1px hsl(0 0% 0% / 0.65), 0px 2px 4px -1px hsl(0 0% 0% / 0.50);
+  --shadow-md: 0px 6px 12px -2px hsl(0 0% 0% / 0.70), 0px 3px 6px -2px hsl(0 0% 0% / 0.55);
+  --shadow-lg: 0px 10px 20px -4px hsl(0 0% 0% / 0.75), 0px 4px 8px -2px hsl(0 0% 0% / 0.60);
+  --shadow-xl: 0px 20px 25px -5px hsl(0 0% 0% / 0.80), 0px 10px 12px -3px hsl(0 0% 0% / 0.65);
+  --shadow-2xl: 0px 25px 50px -12px hsl(0 0% 0% / 0.90);
 
 }
 

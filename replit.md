@@ -13,6 +13,7 @@ The application features:
 - Audio wave visualization for playback feedback
 - Configurable schedule times stored in browser localStorage
 - Brand-consistent design matching Perfect Moods visual identity
+- Light/dark theme switching with persistent preference storage
 - Full keyboard accessibility with semantic HTML and ARIA labels
 
 ## User Preferences
@@ -49,10 +50,18 @@ Preferred communication style: Simple, everyday language.
 
 **Key Components**:
 - `RadioController`: Main controller component managing audio playback, scheduling logic, track info fetching, and user interactions
+- `ThemeProvider`: Context provider for light/dark theme switching with localStorage persistence
 - `TimeDisplay`: Real-time clock with Dutch locale formatting
 - `StatusIndicator`: Visual status cards showing radio, day type, schedule states, and link to Studio PB.NL
 - `AudioWaveVisualizer`: Animated wave visualization responding to playback state
 - `NowPlayingTrack`: Track information display component showing current song details
+
+**Theme System**:
+- Light mode: Original Perfect Moods beige (#c9c4c0) and dark gray (#444444) branding on white background
+- Dark mode: Aura CMS-inspired styling with near-black background (#050505), blue accent (#3b82f6), white text
+- Theme toggle button in top-right corner with Moon/Sun icons
+- Theme preference persisted in localStorage under key "radio-theme"
+- Synchronous theme application on page load to prevent flash of wrong theme
 
 ### Backend Architecture
 
