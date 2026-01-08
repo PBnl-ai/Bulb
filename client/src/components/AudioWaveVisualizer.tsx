@@ -14,7 +14,7 @@ export default function AudioWaveVisualizer({ isPlaying }: AudioWaveVisualizerPr
           key={i}
           className={`w-1 rounded-full transition-all ${
             isPlaying ? "animate-wave" : "h-4"
-          } ${theme === "light" ? "bg-primary" : "bg-[#3b82f6]"}`}
+          } ${theme === "light" ? "bg-primary" : "bg-[#c9c4c0]"}`}
           style={{
             height: isPlaying ? "100%" : "16px",
             animationDelay: `${i * 0.05}s`,

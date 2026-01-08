@@ -269,7 +269,7 @@ export default function RadioController() {
           />
           <div>
             <h1 className="text-[2.7rem] md:text-[3.6rem] uppercase tracking-wider leading-none" style={{ fontFamily: "'Bebas Neue', sans-serif" }}>
-              <span className={theme === "light" ? "text-[#c9c4c0]" : "text-[#3b82f6]"}>PERFECT</span>
+              <span className={theme === "light" ? "text-[#c9c4c0]" : "text-[#c9c4c0]"}>PERFECT</span>
               <span className={theme === "light" ? "text-[#444444]" : "text-white"}>MOODS</span>
             </h1>
             <h2 className={`text-base md:text-xl mt-0 ${
@@ -344,7 +344,7 @@ export default function RadioController() {
               <p className={`${
                 theme === "light" 
                   ? `text-xl md:text-2xl ${isPlaying ? "font-light animate-sway text-[#c9c4c0]" : "font-bold text-muted-foreground"}`
-                  : `font-mono-tech text-xs uppercase tracking-widest ${isPlaying ? "text-[#3b82f6]" : "text-neutral-600"}`
+                  : `font-mono-tech text-xs uppercase tracking-widest ${isPlaying ? "text-[#c9c4c0]" : "text-neutral-600"}`
               }`} data-testid="text-now-playing">
                 {theme === "light" 
                   ? (isPlaying ? "Now playing" : "Stopped")
@@ -523,10 +523,10 @@ export default function RadioController() {
             <div className={`mt-3 md:mt-4 p-3 md:p-4 ${
               theme === "light" 
                 ? "rounded-xl md:rounded-2xl bg-[#c9c4c0]/20 border border-[#c9c4c0]" 
-                : "rounded-sm bg-[#3b82f6]/10 border border-dashed border-[#3b82f6]/40"
+                : "rounded-sm bg-[#c9c4c0]/10 border border-dashed border-[#c9c4c0]/40"
             }`}>
               <p className={`font-medium ${
-                theme === "light" ? "text-xs md:text-sm text-[#444444]" : "font-mono-tech text-[10px] uppercase tracking-widest text-[#3b82f6]"
+                theme === "light" ? "text-xs md:text-sm text-[#444444]" : "font-mono-tech text-[10px] uppercase tracking-widest text-[#c9c4c0]"
               }`} data-testid="text-manual-override">
                 {theme === "light" 
                   ? "Manual control active - automatic schedule resumes in 1 minute" 
@@ -542,7 +542,7 @@ export default function RadioController() {
             <DialogTrigger asChild>
               <button 
                 className={`text-xs transition-colors underline flex items-center gap-1 mx-auto ${
-                  theme === "light" ? "text-[#c9c4c0] hover:text-[#444444]" : "text-[#3b82f6] hover:text-white"
+                  theme === "light" ? "text-[#c9c4c0] hover:text-[#444444]" : "text-[#c9c4c0] hover:text-white"
                 }`}
                 data-testid="button-autostart-instructions"
               >

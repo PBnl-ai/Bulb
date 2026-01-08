@@ -66,7 +66,7 @@ Preferred communication style: Simple, everyday language.
   - JetBrains Mono font for technical labels
   - Uppercase text with wide letter-spacing
   - Technical label format (e.g., "LOUNGE_WEBRADIO", "[ NOW_PLAYING ]", "SCHEDULE_CONFIG")
-  - Blue accent (#3b82f6) for highlights, white/gray for text
+  - Perfect Moods beige accent (#c9c4c0) for highlights, white/gray for text
   - Square corners (rounded-sm) instead of rounded-full
 - Theme toggle button in top-right corner with Moon/Sun icons
 - Theme preference persisted in localStorage under key "radio-theme"
