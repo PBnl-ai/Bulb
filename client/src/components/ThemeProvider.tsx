@@ -11,14 +11,18 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 function getInitialTheme(): Theme {
   if (typeof window !== "undefined") {
+    // One-time migration: force light for existing dark users
+    if (localStorage.getItem("radio-theme-migrated") !== "v2") {
+      localStorage.setItem("radio-theme-v2", "light");
+      localStorage.setItem("radio-theme-migrated", "v2");
+    }
     const saved = localStorage.getItem("radio-theme-v2");
     if (saved === "dark" || saved === "light") {
       document.documentElement.classList.toggle("dark", saved === "dark");
       return saved;
     }
-    document.documentElement.classList.add("dark");
   }
-  return "dark";
+  return "light";
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
